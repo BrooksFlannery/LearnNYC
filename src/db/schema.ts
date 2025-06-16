@@ -1,4 +1,6 @@
-import { pgTable, text, timestamp, boolean, uuid, varchar, pgEnum } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean, uuid, varchar, pgEnum, integer } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
+
 
 export const user = pgTable("user", {
     id: text('id').primaryKey(),
@@ -46,22 +48,24 @@ export const verification = pgTable("verification", {
     updatedAt: timestamp('updated_at').$defaultFn(() => /* @__PURE__ */ new Date())
 });
 
-export const chat = pgTable("chat", {
-    id: uuid("id").defaultRandom().primaryKey(),
-    userId: text("userId").notNull().references(() => user.id),
-    chatName: varchar("chatName", { length: 256 }).default("New Chat"),
-    createdAt: timestamp("createdAt", { withTimezone: true }).defaultNow().notNull(),
+
+export const boroughEnum = pgEnum("borough", ["manhattan", "the_bronx", "staten_island", "brooklyn", "queens"]);
+
+export const character = pgTable("character", {
+    id: text("id").primaryKey(),
+    name: varchar("name", { length: 256 }).notNull(),
+    prompt: text("prompt").notNull(),
+    borough: boroughEnum("borough").notNull(),
 });
 
-export const roleEnum = pgEnum("role", ["user", "assistant", "tool", "system"]);
-
-export const message = pgTable("message", {
-    id: uuid("id").defaultRandom().primaryKey(),
-    chatId: uuid("chatId").notNull().references(() => chat.id),
-    content: text("content").notNull(),
-    createdAt: timestamp("createdAt", { withTimezone: true }).defaultNow().notNull(),
-    accessedAt: timestamp("accessedAt", { withTimezone: true }).defaultNow().notNull(),
-    role: roleEnum("role").notNull(),
-});
+export const question = pgTable("question", {
+    id: text("id").primaryKey(),
+    question: text("question"),
+    answer: text("answer").notNull(),
+    characterId: text("character_id").notNull().references(() => character.id),
+    difficulty: integer("difficulty"),
+}, (table) => ({
+    difficultyRange: sql`CHECK (${table.difficulty} BETWEEN 1 AND 100)`,
+}));
 
 export const schema = { user, session, account, verification }
