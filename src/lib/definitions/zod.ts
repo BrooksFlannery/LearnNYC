@@ -48,23 +48,22 @@ export const verificationSchema = z.object({
     updatedAt: z.preprocess(val => new Date(val as string), z.date()),
 });
 
-export const chatSchema = z.object({
-    id: z.string().uuid(),
-    userId: z.string(),
-    chatName: z.string().max(256),
-    createdAt: z.preprocess(val => new Date(val as string), z.date()),
+
+
+export const boroughEnumVal = ['manhattan', 'the_bronx', 'staten_island', 'brooklyn'] as const;
+
+export const characterSchema = z.object({
+    id: z.string(),
+    name: z.string(),
+    prompt: z.string(),
+    borough: z.enum(boroughEnumVal),
 });
 
-
-export const roleEnumValues = ['user', 'assistant', 'tool', 'system'] as const;
-
-export const messageSchema = z.object({
+export const questionSchema = z.object({
     id: z.string().uuid(),
-    chatId: z.string().uuid(),
-    content: z.string(),
-    createdAt: z.preprocess(val => new Date(val as string), z.date()),
-    accessedAt: z.preprocess(val => new Date(val as string), z.date()),
-    role: z.enum(roleEnumValues),
+    question: z.string(),
+    answer: z.string(),
+    difficulty: z.number().int().min(1).max(100),
+    characterId: z.string()
 });
-
 

@@ -1,4 +1,4 @@
-CREATE TYPE "public"."role" AS ENUM('user', 'assistant', 'tool', 'system');--> statement-breakpoint
+CREATE TYPE "public"."borough" AS ENUM('manhattan', 'the_bronx', 'staten_island', 'brooklyn', 'queens');--> statement-breakpoint
 CREATE TABLE "account" (
 	"id" text PRIMARY KEY NOT NULL,
 	"account_id" text NOT NULL,
@@ -15,20 +15,19 @@ CREATE TABLE "account" (
 	"updated_at" timestamp NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "chat" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"userId" text NOT NULL,
-	"chatName" varchar(256) DEFAULT 'New Chat',
-	"createdAt" timestamp with time zone DEFAULT now() NOT NULL
+CREATE TABLE "character" (
+	"id" text PRIMARY KEY NOT NULL,
+	"name" varchar(256) NOT NULL,
+	"prompt" text NOT NULL,
+	"borough" "borough" NOT NULL
 );
 --> statement-breakpoint
-CREATE TABLE "message" (
-	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"chatId" uuid NOT NULL,
-	"content" text NOT NULL,
-	"createdAt" timestamp with time zone DEFAULT now() NOT NULL,
-	"accessedAt" timestamp with time zone DEFAULT now() NOT NULL,
-	"role" "role" NOT NULL
+CREATE TABLE "question" (
+	"id" text PRIMARY KEY NOT NULL,
+	"question" text,
+	"answer" text NOT NULL,
+	"character_id" text NOT NULL,
+	"difficulty" integer
 );
 --> statement-breakpoint
 CREATE TABLE "session" (
@@ -64,6 +63,5 @@ CREATE TABLE "verification" (
 );
 --> statement-breakpoint
 ALTER TABLE "account" ADD CONSTRAINT "account_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "chat" ADD CONSTRAINT "chat_userId_user_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."user"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "message" ADD CONSTRAINT "message_chatId_chat_id_fk" FOREIGN KEY ("chatId") REFERENCES "public"."chat"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "question" ADD CONSTRAINT "question_character_id_character_id_fk" FOREIGN KEY ("character_id") REFERENCES "public"."character"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "session" ADD CONSTRAINT "session_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;
