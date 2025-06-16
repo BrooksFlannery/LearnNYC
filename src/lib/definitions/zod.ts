@@ -50,7 +50,7 @@ export const verificationSchema = z.object({
 
 
 
-export const boroughEnumVal = ['manhattan', 'the_bronx', 'staten_island', 'brooklyn'] as const;
+export const boroughEnumVal = ['manhattan', 'the_bronx', 'staten_island', 'brooklyn', 'queens'] as const;
 
 export const characterSchema = z.object({
     id: z.string(),

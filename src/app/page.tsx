@@ -1,10 +1,10 @@
-import { AppSidebar } from "~/components/app-sidebar";
+import { CharacterMenu } from "~/components/character-menu";
 
 export default async function Home() {
 
   return (
     <>
-      <AppSidebar />
+      <CharacterMenu />
     </>
   );
 }
