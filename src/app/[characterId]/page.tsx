@@ -1,25 +1,22 @@
 'use client'
 
-import { useChat } from '@ai-sdk/react'
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { use } from 'react';
+import ChatDisplay from '~/components/chat-display';
+import { clientChatApi } from '~/lib/api';
+import type { CharacterData } from '~/lib/definitions/types';
 
-export default function Page() {
+export default function Page({ params }: { params: Promise<{ characterId: string }> }) {
+    const [character, setCharacter] = useState<CharacterData | null>(null);
+    const api = new clientChatApi();
+    const { characterId } = useParams();
 
-    const { messages, input, handleInputChange, handleSubmit } = useChat({});
+    useEffect(() => {
+        api.getCharacter(characterId as string).then(setCharacter);
+    }, [characterId]);
 
-    return (
-        <>
-            {messages.map(message => (
-                <div key={message.id}>
-                    {message.role === 'user' ? 'User:' : 'AI:'}
-                    {message.content}
-                </div>
-            ))}
+    if (!character?.prompt) return <div>Loading character…</div>;
 
-            <form onSubmit={handleSubmit}>
-                <input type="prompt" value={input}
-                    onChange={handleInputChange} />
-                <button type='submit'>Submit</button>
-            </form>
-        </>
-    )
+    return <ChatDisplay {...character} />;
 }
