@@ -23,7 +23,7 @@ CREATE TABLE "character" (
 );
 --> statement-breakpoint
 CREATE TABLE "question" (
-	"id" text PRIMARY KEY NOT NULL,
+	"id" uuid DEFAULT gen_random_uuid(),
 	"question" text,
 	"answer" text NOT NULL,
 	"character_id" text NOT NULL,
