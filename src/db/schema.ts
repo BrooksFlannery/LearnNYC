@@ -56,6 +56,7 @@ export const character = pgTable("character", {
     name: varchar("name", { length: 256 }).notNull(),
     prompt: text("prompt").notNull(),
     borough: boroughEnum("borough").notNull(),
+    image: text("image").notNull()
 });
 
 export const question = pgTable("question", {

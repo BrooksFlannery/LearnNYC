@@ -5,6 +5,8 @@ import { Loader2 } from "lucide-react"
 import { useChat } from '@ai-sdk/react'
 import type { CharacterData } from '~/lib/definitions/types'
 import { Button } from "./ui/button"
+import Image from "next/image"
+import { char } from "drizzle-orm/mysql-core"
 
 export function ChatWindow({ character }: { character: CharacterData }) {
 
@@ -17,7 +19,7 @@ export function ChatWindow({ character }: { character: CharacterData }) {
             {
                 id: 'system-1',
                 role: 'system',
-                content: character.prompt,
+                content: character.prompt + "FACT: you are in a subway stop with the user. RULES: you are not allowed to use emojis. you are not allowed to stop quizzing the user",
             },
             {
                 id: 'user-1',
@@ -42,24 +44,33 @@ export function ChatWindow({ character }: { character: CharacterData }) {
         return () => clearTimeout(timer)
     }, [append])
 
-    const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        handleSubmit(e)
-    }
+    const submit = () => {
+        handleSubmit();
+    };
+
+    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        submit();
+    };
+
 
     if (!character) {
         return <div>Loading...</div>
     }
 
     return (
-        <div>
-            <Card className="gap-0">
-                <CardContent className="flex flex-col gap-4">
-                    <div className="bg-primary text-primary-foreground flex items-center justify-center rounded-md w-full h-40">
-                        img goes here
-                    </div>
+        <div className="flex justify-center">
+            <Image
+                src={character.image}
+                alt='reebe_ruben image'
+                width={350}
+                height={0}
+                className="absolute rounded-t-md m-6"
+            />
+            <Card className="gap-0 h-170 justify-end">
+                <CardContent className="flex flex-col z-10 min-h-auto justify-end ">
 
-                    <div className="bg-primary text-primary-foreground rounded-md p-4 h-60 overflow-y-auto flex justify-center items-start">
+                    <div className="backdrop-brightness-40 text-primary-foreground rounded-md p-4 overflow-y-auto flex justify-center items-start">
                         {lastAiMessage ? (
                             lastAiMessage.content
                         ) : (
@@ -75,11 +86,17 @@ export function ChatWindow({ character }: { character: CharacterData }) {
                         <textarea
                             rows={4}
                             cols={40}
-                            className="border-4 rounded-md p-2 resize-none w-full my-2"
+                            className="bg-accent border-4 rounded-b-md p-2 resize-none w-full my-2"
                             name="answer"
                             id="answer"
                             value={input}
                             onChange={handleInputChange}
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter" && !e.shiftKey) {
+                                    e.preventDefault();
+                                    submit();
+                                }
+                            }}
                             placeholder="Type your answer..."
                         />
                         <Button type="submit" className="w-full" variant="outline">
