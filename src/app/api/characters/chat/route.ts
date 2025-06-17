@@ -1,16 +1,32 @@
-
 import { openai } from '@ai-sdk/openai';
 import { streamText, tool } from 'ai';
 import { z } from 'zod';
 import { db } from '~/db/drizzle'
-import { question } from '~/db/schema';
+import { character, question } from '~/db/schema';
 import { eq } from 'drizzle-orm';
-
 
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
-    const { messages } = await req.json();
+    const { messages, characterId } = await req.json();
+
+    async function giveQuestion() {
+        console.log('GIVE QUESTION for characterId:', characterId)
+        const questions = await db
+            .select()
+            .from(question)
+            .where(eq(question.characterId, characterId));
+
+        console.log('Found questions:', questions.length);
+
+        if (!questions || questions.length === 0) {
+            return 'Actually im all out of questions, you win!';
+        }
+
+        const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+        console.log('Selected question:', JSON.stringify(randomQuestion));
+        return JSON.stringify(randomQuestion);
+    }
 
     const result = streamText({
         model: openai('gpt-4o-mini'),
@@ -18,16 +34,15 @@ export async function POST(req: Request) {
         maxSteps: 2,
         tools: {
             hintQuiz: tool({
-                description: "ONLY call this when a user asks for help on the quiz for the FIRST time in the chat",
+                description: "ONLY call this when a user asks for help on the quiz: ONLY ONCE PER CHAT",
                 parameters: z.object({
-                    userMessage: z.string().describe('ONLY when the user asks for help on the quiz for the FIRST time in the chat'),
+                    userMessage: z.string().describe('ONLY when the user asks for help on the quiz: ONLY ONCE PER CHAT'),
                 }),
-                execute: async ({ userMessage }) => {
-                    console.log('user is avoiding the question');
-                    console.log('User said:', userMessage);
-                    console.log('Timestamp:', new Date().toISOString());
-
+                execute: async () => {
+                    console.log('user is using their one hint');
+                    //if(hints > 0)
                     return 'give a hint';
+                    //return 'no hint for you'
                 }
             }),
 
@@ -42,12 +57,22 @@ export async function POST(req: Request) {
                 }
             }),
             incorrectQuiz: tool({
-                description: "ONLY call this when a user answers the LAST quiz INCORRECTLY ONLY OR if they avoid the question",
+                description: "ONLY call this when a user answers the LAST quiz INCORRECTLY ONLY",
                 parameters: z.object({
-                    userMessage: z.string().describe('ONLY when the user answers the LAST quiz INCORRECTLY Or if they avoid the question'),
+                    userMessage: z.string().describe('ONLY when the user answers the LAST quiz INCORRECTLY'),
                 }),
                 execute: async () => {
                     console.log('MINUS POINTS')
+                    return giveQuestion();
+                }
+            }),
+            exitQuiz: tool({
+                description: "ONLY call this when a user avoids or tries to quit the quiz. we respond with a new quiz",
+                parameters: z.object({
+                    userMessage: z.string().describe('ONLY when the user avoids or tries to quit the quiz. we respond with a new quiz'),
+                }),
+                execute: async () => {
+                    console.log('MINUS POINTS QUITER')
                     return giveQuestion();
                 }
             }),
@@ -66,16 +91,4 @@ export async function POST(req: Request) {
     });
 
     return result.toDataStreamResponse();
-}
-
-async function giveQuestion() {
-    const questions = await db
-        .select()
-        .from(question)
-        .where(eq(question.characterId, 'bodega_tony'));
-
-    const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
-
-    console.log(JSON.stringify(randomQuestion));
-    return JSON.stringify(randomQuestion);
 }
