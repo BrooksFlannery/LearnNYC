@@ -5,11 +5,18 @@ export default function ChatDisplay(character: CharacterData) {
 
     const { messages, input, handleInputChange, handleSubmit, setMessages } = useChat({
         api: `/api/characters/chat`,
+
         initialMessages: [
             {
                 id: 'system-1',
                 role: 'system',
                 content: character.prompt
+            },
+            {
+                id: 'user-1',
+                role: 'user',
+                content: "Introduce yourself and give me a quiz"
+
             }
         ]
     });
@@ -21,7 +28,7 @@ export default function ChatDisplay(character: CharacterData) {
     return (
         <>
             {messages
-                .filter(message => message.id !== 'system-1')
+                .filter(message => message.id !== 'system-1' && message.id !== 'user-1')
                 .map(message => (
                     <div key={message.id}>
                         {message.role === 'user' ? 'User: ' : 'AI: '}
