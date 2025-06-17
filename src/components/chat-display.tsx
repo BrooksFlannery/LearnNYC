@@ -1,29 +1,40 @@
 import { useChat } from '@ai-sdk/react'
+import { useEffect, useState } from 'react';
 import type { CharacterData } from '~/lib/definitions/types';
 
 export default function ChatDisplay(character: CharacterData) {
+    const [load, setLoad] = useState<Boolean>(false);
 
-    const { messages, input, handleInputChange, handleSubmit, setMessages } = useChat({
+    const { messages, input, handleInputChange, handleSubmit, append } = useChat({
         api: `/api/characters/chat`,
-
+        body: {
+            characterId: character.id
+        },
         initialMessages: [
             {
                 id: 'system-1',
                 role: 'system',
-                content: character.prompt
+                content: character.prompt,
             },
             {
                 id: 'user-1',
                 role: 'user',
-                content: "Introduce yourself and give me a quiz"
-
+                content: "The user cant see this message, you neet to use the giveQuiz tool"
             }
         ]
     });
 
     if (!character) {
-        return <div>Loading...</div>;//this shouldnt be possible? maybe redirect to home
+        return <div>Loading...</div>; // this shouldn't be possible? maybe redirect to home
     }
+
+    useEffect(() => {
+        setLoad(true)
+        const timer = setTimeout(() => {
+            append({ role: 'user', id: 'user-1', content: 'The user cant see this message, you neet to introduce yourself then use the giveQuiz tool' });
+        }, 5);
+        return () => clearTimeout(timer);
+    }, [append]); // Add append to dependencies
 
     return (
         <>
@@ -43,7 +54,7 @@ export default function ChatDisplay(character: CharacterData) {
                     onChange={handleInputChange}
                     placeholder="Type your message..."
                 />
-                <button type="submit">Submit</button>
+                <button disabled={!load} type="submit">Submit</button>
             </form>
         </>
     );
