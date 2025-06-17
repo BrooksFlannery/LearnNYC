@@ -59,7 +59,7 @@ export const character = pgTable("character", {
 });
 
 export const question = pgTable("question", {
-    id: text("id").primaryKey(),
+    id: uuid('id').default(sql`gen_random_uuid()`),
     question: text("question"),
     answer: text("answer").notNull(),
     characterId: text("character_id").notNull().references(() => character.id),
