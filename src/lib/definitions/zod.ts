@@ -55,6 +55,7 @@ export const boroughEnumVal = ['manhattan', 'the_bronx', 'staten_island', 'brook
 export const characterSchema = z.object({
     id: z.string(),
     name: z.string(),
+    image: z.string(),
     prompt: z.string(),
     borough: z.enum(boroughEnumVal),
 });
