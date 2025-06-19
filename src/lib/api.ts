@@ -56,4 +56,5 @@ export class clientChatApi implements chatNycApi {
             throw error;
         }
     }
+
 }
