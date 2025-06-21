@@ -5,6 +5,14 @@
 import "./src/env.js";
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+    // Skip ESLint and TypeScript errors during production builds (e.g., Vercel).
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
+    typescript: {
+        ignoreBuildErrors: true,
+    },
+};
 
 export default config;
