@@ -18,7 +18,7 @@ export function ChatWindow({ character, onAdvanceTurn }: { character: CharacterD
             {
                 id: 'system-1',
                 role: 'system',
-                content: character.prompt + "FACT: you are on the Subway with the user. RULES: you are not allowed to use emojis. GOALS: Above all else, stay in character. Occasionally ask them if they want a quiz",
+                content: character.prompt + "FACT: you are on the Subway with the user. RULES: you are not allowed to use emojis.",
             },
         ]
     })
