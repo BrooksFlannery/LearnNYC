@@ -33,19 +33,6 @@ export async function POST(req: Request) {
         messages,
         maxSteps: 2,
         tools: {
-            hintQuiz: tool({
-                description: "ONLY call this when a user asks for help on the quiz: ONLY ONCE PER CHAT",
-                parameters: z.object({
-                    userMessage: z.string().describe('ONLY when the user asks for help on the quiz: ONLY ONCE PER CHAT'),
-                }),
-                execute: async () => {
-                    console.log('user is using their one hint');
-                    //if(hints > 0)
-                    return 'give a hint';
-                    //return 'no hint for you'
-                }
-            }),
-
             correctQuiz: tool({
                 description: "ONLY call this when a user answers the LAST quiz CORRECTLY ",
                 parameters: z.object({
@@ -53,6 +40,7 @@ export async function POST(req: Request) {
                 }),
                 execute: async () => {
                     console.log('PLUS POINTS')
+
                     return giveQuestion()
                 }
             }),

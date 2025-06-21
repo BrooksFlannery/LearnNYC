@@ -2,7 +2,6 @@ import { allLines } from './data/lines';
 import { REAL_STATIONS } from './data/realStations';
 import type { Station, Train, TrainLine } from './definitions/types';
 
-//i think this is useful for fast lookups?
 export function buildStationGraph(): Map<string, Station> {
     const stationMap = new Map<string, Station>();
     REAL_STATIONS.forEach((station: Station) => {
@@ -19,13 +18,11 @@ export function buildLineGraph(): Map<string, TrainLine> {
     return lineMap;
 }
 
-// Helper function to get random start/end pair
 export function getRandomStationPair(): { start: Station; end: Station } {
     const stations = REAL_STATIONS;
     const start = stations[Math.floor(Math.random() * stations.length)];
     let end = stations[Math.floor(Math.random() * stations.length)];
 
-    // Ensure start and end are different
     while (end.id === start.id) {
         end = stations[Math.floor(Math.random() * stations.length)];
     }
@@ -66,7 +63,6 @@ function seedTrain(line: TrainLine, stationIndex: number, id: number): Train {
         id: `train-${id}`,
         isAtStation: true,
     }
-    console.log(newTrain)
     return newTrain
 }
 
@@ -76,16 +72,6 @@ export type ArrivalInfo = {
     arrivalTurns: number;
 };
 
-/**
- * Computes the upcoming arrivals for a single station given the current train positions.
- *
- * The algorithm walks forward along each line that services the station until it finds the
- * next train that is currently waiting at a station (isAtStation === true).  It counts
- * the number of turns required for that train to reach the target station:
- *   arrivalTurns = train.nextArrivalTurn + numberOfStationsBetween(trainStation, targetStation)
- *
- * If no train is found after one full loop of the line, the line is ignored for now.
- */
 export function computeArrivalsForStation(
     station: Station,
     trains: Train[],

@@ -63,4 +63,5 @@ export type GameManager = {
     exitTrain: (train: Train) => void;
     boardTrain: (train: Train) => void;
     advanceTurn: () => void;
+    characterTrigger: number; // increments when a new character should be shown
 }

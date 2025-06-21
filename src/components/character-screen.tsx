@@ -5,7 +5,7 @@ import { ChatWindow } from "./chat-window";
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 
-export function CharacterScreen({ characters }: { characters: CharacterData[] | null }) {
+export function CharacterScreen({ characters, onAdvanceTurn, characterTrigger }: { characters: CharacterData[] | null; onAdvanceTurn?: () => void; characterTrigger: number }) {
     const [character, setCharacter] = useState<CharacterData | null>(null);
 
     useEffect(() => {
@@ -16,7 +16,7 @@ export function CharacterScreen({ characters }: { characters: CharacterData[] | 
                 setCharacter(randomCharacter);
             }
         }
-    }, [characters]);
+    }, [characters, characterTrigger]);
 
     if (!character) {
         return (
@@ -29,7 +29,11 @@ export function CharacterScreen({ characters }: { characters: CharacterData[] | 
 
     return (
         <div className="flex flex-col w-100">
-            <ChatWindow character={character} />
+            <ChatWindow
+                key={`${character.id}-${characterTrigger}`}
+                character={character}
+                onAdvanceTurn={onAdvanceTurn}
+            />
         </div>
     )
 }
