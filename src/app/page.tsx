@@ -36,9 +36,7 @@ export default function Home() {
         <h1 className="text-3xl font-bold text-gray-900">Learn New York City</h1>
         <Logout />
       </header>
-      {/* Map with overlays */}
       <div className="relative flex-1 overflow-hidden">
-        {/* Base map fills the space */}
         <SubwayMap gameManager={gameManager} />
 
         {/* Upcoming arrivals – bottom right */}

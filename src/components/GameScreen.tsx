@@ -27,6 +27,27 @@ export default function GameScreen({ gameManager }: { gameManager: GameManager }
 
     return (
         <div className="space-y-6">
+            {/* Walkable Stations panel */}
+            {!gameManager.game.currentTrain && gameManager.game.currentStation.walkable &&
+                <div className="bg-white p-4 rounded-lg shadow-sm">
+                    <h2 className="text-lg font-semibold text-gray-900 mb-2">Available Platforms</h2>
+                    <div className="space-y-1 text-gray-800">
+                        {gameManager.game.currentStation.walkable.map(stationId => {
+                            const station = REAL_STATIONS.find(s => s.id === stationId);
+                            if (!station) return null;
+                            return (
+                                <button
+                                    key={station.id}
+                                    className="bg-blue-400 hover:bg-blue-500 text-white px-4 py-2 rounded w-full text-left"
+                                    onClick={() => gameManager.makeMove(station)}
+                                >
+                                    {`Walk to ${station.name}`}
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
+            }
 
 
             {/* Upcoming arrivals panel */}
