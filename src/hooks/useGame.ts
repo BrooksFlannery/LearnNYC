@@ -2,6 +2,9 @@ import { useEffect, useMemo, useState } from "react";
 import type { GameManager, GameState, Station, Train, TrainLine } from "~/lib/definitions/types";
 import { buildStationGraph, buildLineGraph, seedTrains } from "~/lib/stationUtils";
 
+// Simple counter to generate unique train IDs across refreshes
+let nextTrainIdCounter = 1000;
+
 export function useGame(): GameManager {
     const stationMap = useMemo(() => buildStationGraph(), []);
     const lineMap = useMemo(() => buildLineGraph(), [])
@@ -60,38 +63,54 @@ export function useGame(): GameManager {
     }, [trains]);
 
     function incrementTrains() {
-        setTrains(prevTrains =>
-            prevTrains.map(train => {
+        setTrains(prevTrains => {
+            const updated: Train[] = [];
+
+            prevTrains.forEach(train => {
                 const nextTurn = train.nextArrivalTurn - 1;
+
+                // Train is still en-route
                 if (nextTurn > 0) {
-                    return { ...train, nextArrivalTurn: nextTurn, isAtStation: false };
+                    updated.push({ ...train, nextArrivalTurn: nextTurn, isAtStation: false });
+                    return;
                 }
 
+                // Determine the train's next station along the line
                 const nextStation = getNextStationFromLine(train.currentStation, train.line);
+
+                // End of the line – remove and spawn a fresh train at the start
                 if (!nextStation) {
-                    const playerStopStation = train.currentStation;
                     const firstStationId = train.line.line[0];
                     const firstStation = firstStationId ? stationMap.get(firstStationId) : undefined;
 
-                    if (train === game?.currentTrain) exitTrain({ ...train, currentStation: playerStopStation });
+                    // If the player is riding this train, kick them off before deletion
+                    if (train === game?.currentTrain) {
+                        exitTrain({ ...train, currentStation: train.currentStation });
+                    }
 
-
-                    return {
-                        ...train,
-                        currentStation: firstStation!,
-                        nextArrivalTurn: 1,
-                        isAtStation: true,
-                    };
+                    if (firstStation) {
+                        updated.push({
+                            currentStation: firstStation,
+                            nextArrivalTurn: 1,
+                            line: train.line,
+                            id: `train-${nextTrainIdCounter++}`,
+                            isAtStation: true,
+                        });
+                    }
+                    return; // do NOT keep the old train
                 }
 
-                return {
+                // Normal movement to the next station
+                updated.push({
                     ...train,
                     currentStation: { ...nextStation },
                     nextArrivalTurn: 1,
                     isAtStation: true,
-                };
-            })
-        );
+                });
+            });
+
+            return updated;
+        });
     }
 
     function getNextStationFromLine(currentStation: Station, trainLine: TrainLine): Station | null {

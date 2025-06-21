@@ -36,15 +36,27 @@ export default function Home() {
         <h1 className="text-3xl font-bold text-gray-900">Learn New York City</h1>
         <Logout />
       </header>
-      <div className="flex flex-1 overflow-hidden">
-        {/* Left panel - Game Controls */}
-        <div className="w-1/3 p-6 overflow-y-auto border-r border-gray-200 flex flex-col justify-between">
-          <GameScreen gameManager={gameManager} />
-          <CharacterScreen characters={characters} onAdvanceTurn={gameManager.advanceTurn} characterTrigger={gameManager.characterTrigger} />
+      {/* Map with overlays */}
+      <div className="relative flex-1 overflow-hidden">
+        {/* Base map fills the space */}
+        <SubwayMap gameManager={gameManager} />
+
+        {/* Upcoming arrivals – top left */}
+        <div className="absolute top-0 left-0 p-4 pointer-events-none max-w-sm w-80">
+          <div className="pointer-events-auto">
+            <GameScreen gameManager={gameManager} />
+          </div>
         </div>
-        {/* Right panel - Map */}
-        <div className="w-2/3 p-6 overflow-hidden">
-          <SubwayMap gameManager={gameManager} />
+
+        {/* Character screen – bottom left */}
+        <div className="absolute bottom-0 left-0 p-4 pointer-events-none max-w-sm w-80">
+          <div className="pointer-events-auto">
+            <CharacterScreen
+              characters={characters}
+              onAdvanceTurn={gameManager.advanceTurn}
+              characterTrigger={gameManager.characterTrigger}
+            />
+          </div>
         </div>
       </div>
     </main>
