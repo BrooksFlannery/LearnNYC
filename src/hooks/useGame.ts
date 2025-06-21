@@ -1,4 +1,3 @@
-
 import { useEffect, useMemo, useState } from "react";
 import type { GameManager, GameState, Station, Train, TrainLine } from "~/lib/definitions/types";
 import { buildStationGraph, buildLineGraph, seedTrains } from "~/lib/stationUtils";
@@ -8,7 +7,7 @@ export function useGame(): GameManager {
     const lineMap = useMemo(() => buildLineGraph(), [])
     const [game, setGame] = useState<GameState | null>(null);
     const [trains, setTrains] = useState<Train[]>([]);
-
+    const [characterTrigger, setCharacterTrigger] = useState<number>(0);
 
     useEffect(() => {
         const middleVillage = stationMap.get("station-748");
@@ -41,7 +40,7 @@ export function useGame(): GameManager {
         setGame(prev => {
             if (!prev) return prev;
 
-            let nextState: GameState = { ...prev, trains }; // always sync trains
+            let nextState: GameState = { ...prev, trains };
 
             if (prev.currentTrain) {
                 const currentTrainId = prev.currentTrain.id;
@@ -71,7 +70,8 @@ export function useGame(): GameManager {
                 const nextStation = getNextStationFromLine(train.currentStation, train.line);
                 if (!nextStation) {
                     const playerStopStation = train.currentStation;
-                    const firstStation = stationMap.get(train.line.line[0]);
+                    const firstStationId = train.line.line[0];
+                    const firstStation = firstStationId ? stationMap.get(firstStationId) : undefined;
 
                     if (train === game?.currentTrain) exitTrain({ ...train, currentStation: playerStopStation });
 
@@ -111,11 +111,15 @@ export function useGame(): GameManager {
         if (!game || !game.currentStation.walkable?.includes(next.id)) return;
         setGame(prev => prev ? { ...prev, currentStation: next } : prev);
         advanceTurn();
+        triggerCharacterRefresh();
     }
+
     function boardTrain(train: Train) {
         setGame(prev => prev ? { ...prev, currentTrain: train, playerMode: 'train' } : prev);
         advanceTurn();
+        triggerCharacterRefresh();
     }
+
     function exitTrain(train: Train) {
         setGame(prev => prev ? {
             ...prev,
@@ -124,6 +128,11 @@ export function useGame(): GameManager {
             currentStation: train.currentStation
         } : prev);
         advanceTurn();
+        triggerCharacterRefresh();
+    }
+
+    function triggerCharacterRefresh() {
+        setCharacterTrigger(prev => prev + 1);
     }
 
     return {
@@ -132,5 +141,6 @@ export function useGame(): GameManager {
         exitTrain,
         boardTrain,
         advanceTurn,
+        characterTrigger,
     };
 }

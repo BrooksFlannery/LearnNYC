@@ -1,14 +1,13 @@
 'use client'
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card"
-import { useState, useEffect } from "react"
+import { Card, CardContent } from "~/components/ui/card"
+import { useEffect } from "react"
 import { Loader2 } from "lucide-react"
 import { useChat } from '@ai-sdk/react'
 import type { CharacterData } from '~/lib/definitions/types'
 import { Button } from "./ui/button"
 import Image from "next/image"
-import { char } from "drizzle-orm/mysql-core"
 
-export function ChatWindow({ character }: { character: CharacterData }) {
+export function ChatWindow({ character, onAdvanceTurn }: { character: CharacterData; onAdvanceTurn?: () => void }) {
 
     const { messages, input, handleInputChange, handleSubmit, append } = useChat({
         api: `/api/characters/chat`,
@@ -46,6 +45,9 @@ export function ChatWindow({ character }: { character: CharacterData }) {
 
     const submit = () => {
         handleSubmit();
+        if (onAdvanceTurn) {
+            onAdvanceTurn();
+        }
     };
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
