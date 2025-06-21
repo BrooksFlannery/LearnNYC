@@ -1,4 +1,4 @@
-import { TrainLine } from "@/lib/types/types"
+import type { TrainLine } from "../definitions/types"
 
 const oneLine: TrainLine = {
     id: 'line-1',
