@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <main className="h-screen w-screen flex flex-col overflow-hidden bg-gradient-to-b from-gray-50 to-gray-100">
 
-      <header className="p-4 bg-white shadow-sm text-center flex justify-between">
+      <header className="p-4 bg-white shadow-sm text-center flex justify-between border-b-2">
         <h1 className="text-3xl font-bold text-gray-900">Learn New York City</h1>
         <Logout />
       </header>
