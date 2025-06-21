@@ -1,6 +1,5 @@
 import type { z } from 'zod';
 import type { userSchema, sessionSchema, characterSchema, questionSchema } from './zod';
-import type { character } from '~/db/schema';
 
 export type UserData = z.infer<typeof userSchema>
 

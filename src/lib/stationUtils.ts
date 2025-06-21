@@ -1,6 +1,7 @@
-import { allLines } from './data/lines';
-import { REAL_STATIONS } from './data/realStations';
-import type { Station, Train, TrainLine } from './definitions/types';
+import { allLines } from "./data/lines";
+import { REAL_STATIONS } from "./data/realStations";
+import type { Station, TrainLine, Train } from "./definitions/types";
+
 
 export function buildStationGraph(): Map<string, Station> {
     const stationMap = new Map<string, Station>();
@@ -20,11 +21,11 @@ export function buildLineGraph(): Map<string, TrainLine> {
 
 export function getRandomStationPair(): { start: Station; end: Station } {
     const stations = REAL_STATIONS;
-    const start = stations[Math.floor(Math.random() * stations.length)];
-    let end = stations[Math.floor(Math.random() * stations.length)];
+    const start = stations[Math.floor(Math.random() * stations.length)]!;
+    let end = stations[Math.floor(Math.random() * stations.length)]!;
 
     while (end.id === start.id) {
-        end = stations[Math.floor(Math.random() * stations.length)];
+        end = stations[Math.floor(Math.random() * stations.length)]!;
     }
 
     return { start, end };

@@ -1,6 +1,6 @@
 import type { CharacterData } from "~/lib/definitions/types";
-import { characterSchema } from "~/lib/definitions/zod";
 import { z } from "zod";
+import { characterSchema } from "./definitions/zod";
 
 export interface chatNycApi {
     getCharacters(): Promise<CharacterData[]>;
