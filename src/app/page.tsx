@@ -41,8 +41,8 @@ export default function Home() {
         {/* Base map fills the space */}
         <SubwayMap gameManager={gameManager} />
 
-        {/* Upcoming arrivals – top left */}
-        <div className="absolute top-0 left-0 p-4 pointer-events-none max-w-sm w-80">
+        {/* Upcoming arrivals – bottom right */}
+        <div className="absolute bottom-0 right-0 p-4 pointer-events-none max-w-sm w-80">
           <div className="pointer-events-auto">
             <GameScreen gameManager={gameManager} />
           </div>
