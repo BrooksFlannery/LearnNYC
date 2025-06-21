@@ -56,18 +56,18 @@ export function ChatWindow({ character, onAdvanceTurn }: { character: CharacterD
     }
 
     return (
-        <div className="flex justify-center relative">
+        <div className="flex justify-center relative w-[400]">
             <Image
                 src={character.image}
                 alt='reebe_ruben image'
-                width={350}
+                width={300}
                 height={0}
                 className="absolute rounded-t-md m-6"
             />
-            <Card className="gap-0 h-170 justify-end">
+            <Card className="gap-0 h-140 justify-end">
                 <CardContent className="flex flex-col z-10 min-h-auto justify-end ">
 
-                    <div className="backdrop-brightness-40 text-primary-foreground rounded-md p-4 overflow-y-auto flex justify-center items-start">
+                    <div className="text-sm backdrop-brightness-40 text-primary-foreground rounded-md p-4 overflow-y-auto flex justify-center items-start">
                         {lastAiMessage ? (
                             lastAiMessage.content
                         ) : (

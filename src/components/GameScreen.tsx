@@ -9,7 +9,7 @@ import { buildLineGraph, buildStationGraph, computeArrivalsForStation } from '~/
 export default function GameScreen({ gameManager }: { gameManager: GameManager }) {
     if (!gameManager.game) {
         return (
-            <div>loading spoinner erras...</div>
+            <div>Loading Spinner...</div>
         )
     }
 
