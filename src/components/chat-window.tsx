@@ -59,7 +59,7 @@ export function ChatWindow({ character }: { character: CharacterData }) {
     }
 
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center relative">
             <Image
                 src={character.image}
                 alt='reebe_ruben image'

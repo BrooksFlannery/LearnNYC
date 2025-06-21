@@ -28,10 +28,8 @@ export function CharacterScreen({ characters }: { characters: CharacterData[] | 
     }
 
     return (
-        <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
-            <div className="flex flex-col gap-6 w-100">
-                <ChatWindow character={character} />
-            </div>
+        <div className="flex flex-col w-100">
+            <ChatWindow character={character} />
         </div>
     )
 }
