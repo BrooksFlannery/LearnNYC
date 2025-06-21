@@ -18,13 +18,8 @@ export function ChatWindow({ character, onAdvanceTurn }: { character: CharacterD
             {
                 id: 'system-1',
                 role: 'system',
-                content: character.prompt + "FACT: you are in a subway stop with the user. RULES: you are not allowed to use emojis. you are not allowed to stop quizzing the user",
+                content: character.prompt + "FACT: you are on the Subway with the user. RULES: you are not allowed to use emojis. GOALS: Above all else, stay in character. Occasionally ask them if they want a quiz",
             },
-            {
-                id: 'user-1',
-                role: 'user',
-                content: "The user cant see this message, you need to use the giveQuiz tool"
-            }
         ]
     })
 
@@ -37,7 +32,7 @@ export function ChatWindow({ character, onAdvanceTurn }: { character: CharacterD
             append({
                 role: 'user',
                 id: 'user-init',
-                content: 'The user cant see this message, you need to introduce yourself then use the giveQuiz tool'
+                content: 'The user cant see this message, you need to introduce yourself where you are from.'
             })
         }, 5)
         return () => clearTimeout(timer)
