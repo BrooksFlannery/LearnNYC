@@ -38,7 +38,7 @@ export default function Home() {
       </header>
       <div className="relative flex-1 overflow-hidden">
         <SubwayMap gameManager={gameManager} />
-
+        { }
         {/* Upcoming arrivals – bottom right */}
         <div className="absolute bottom-0 right-0 p-4 pointer-events-none max-w-sm w-80">
           <div className="pointer-events-auto">

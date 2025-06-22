@@ -1,6 +1,7 @@
 import { allLines } from "./data/lines";
-import { REAL_STATIONS } from "./data/realStations";
-import type { Station, TrainLine, Train } from "./definitions/types";
+import { REAL_STATIONS } from "./data/stations";
+import { COMPLEXES } from "./data/complexes";
+import type { Station, TrainLine, Train, StationComplex } from "./definitions/types";
 
 
 export function buildStationGraph(): Map<string, Station> {
@@ -17,6 +18,14 @@ export function buildLineGraph(): Map<string, TrainLine> {
         lineMap.set(line.id, line);
     });
     return lineMap;
+}
+
+export function buildComplexGraph(): Map<string, StationComplex> {
+    const complexMap = new Map<string, StationComplex>();
+    COMPLEXES.forEach((complex: StationComplex) => {
+        complexMap.set(complex.id, complex);
+    });
+    return complexMap;
 }
 
 export function getRandomStationPair(): { start: Station; end: Station } {
@@ -120,3 +129,4 @@ export function computeArrivalsForStation(
 
     return arrivals;
 }
+

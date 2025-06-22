@@ -7,12 +7,8 @@ export interface chatNycApi {
     getCharacter(characterId: CharacterData["id"]): Promise<CharacterData>;
 }
 
-// const createChatResponseSchema = z.object({
-//     id: z.string().uuid(),
-// });
 
 const characterArraySchema = z.array(characterSchema);
-// const messagesArraySchema = z.array(messageSchema);
 
 export class clientChatApi implements chatNycApi {
     async getCharacters(): Promise<CharacterData[]> {

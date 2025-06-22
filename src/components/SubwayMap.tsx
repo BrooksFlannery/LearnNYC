@@ -1,7 +1,7 @@
 'use client';
 
 import { Flag, MapPin } from "lucide-react";
-import { REAL_STATIONS } from "~/lib/data/realStations";
+import { REAL_STATIONS } from "~/lib/data/stations";
 import type { GameManager } from "~/lib/definitions/types";
 
 
@@ -58,34 +58,41 @@ export default function SubwayMap({ gameManager }: { gameManager: GameManager })
                     <image href="/nyc_subway_map.svg" x={0} y={0} width={2500} height={2700} />
 
                     {/* Draw stations */}
-                    {REAL_STATIONS.map(station => {
-                        const isCurrent = station.id === gameManager.game?.currentStation.id;
-                        const isAvailable =
-                            !gameManager.game?.currentTrain &&
-                            gameManager.game?.currentStation.walkable?.includes(station.id);
+                    {(() => {
+                        const currentComplex = gameManager.game!.currentStation.complexId;
+                        const currentStationId = gameManager.game!.currentStation.id;
+                        return REAL_STATIONS.map(station => {
+                            const isCurrent = station.id === currentStationId;
+                            const stationComplex = station.complexId;
+                            const isAvailable =
+                                !!currentComplex && // only if current station is part of a complex
+                                !gameManager.game!.currentTrain &&
+                                station.id !== currentStationId &&
+                                stationComplex === currentComplex;
 
-                        return (
-                            <g
-                                key={station.id}
-                                onClick={() => {
-                                    if (isAvailable) {
-                                        gameManager.makeMove(station);
-                                    }
-                                }}
-                                style={{ cursor: isAvailable ? "pointer" : "default" }}
-                            >
-                                <circle
-                                    cx={station.coordinates.x}
-                                    cy={station.coordinates.y}
-                                    r={7}
-                                    fill={isCurrent || isAvailable ? "#fff" : "#00000000"}
-                                    stroke={isCurrent ? "#000000" : "#0000000"}
-                                    strokeWidth={2}
-                                    className="transition-all duration-200"
-                                />
-                            </g>
-                        );
-                    })}
+                            return (
+                                <g
+                                    key={station.id}
+                                    onClick={() => {
+                                        if (isAvailable) {
+                                            gameManager.makeMove(station);
+                                        }
+                                    }}
+                                    style={{ cursor: isAvailable ? "pointer" : "default" }}
+                                >
+                                    <circle
+                                        cx={station.coordinates.x}
+                                        cy={station.coordinates.y}
+                                        r={7}
+                                        fill={isCurrent || isAvailable ? "#fff" : "#00000000"}
+                                        stroke={isCurrent ? "#000000" : "#0000000"}
+                                        strokeWidth={2}
+                                        className="transition-all duration-200"
+                                    />
+                                </g>
+                            );
+                        });
+                    })()}
 
                     {/* Draw trains */}
                     {gameManager.game.trains.map(train => {

@@ -33,7 +33,9 @@ export function advanceTurn(state: GameState): GameState {
 export function makeMove(state: GameState, nextStationId: string): GameState {
     const nextStation = stationMap.get(nextStationId);
     if (!nextStation) return state;
-    if (!state.currentStation.walkable?.includes(nextStation.id)) return state;
+    const currentComplex = state.currentStation.complexId;
+    const nextComplex = nextStation.complexId;
+    if (!currentComplex || currentComplex !== nextComplex) return state;
     return {
         ...state,
         currentStation: nextStation,
