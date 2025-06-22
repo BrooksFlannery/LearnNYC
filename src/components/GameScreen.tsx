@@ -1,6 +1,6 @@
 'use client';
 
-import { Flag } from 'lucide-react';
+import { Flag, MapPin } from 'lucide-react';
 import { useMemo } from 'react';
 import { REAL_STATIONS } from '~/lib/data/realStations';
 import type { GameManager, Station } from '~/lib/definitions/types';
@@ -29,7 +29,7 @@ export default function GameScreen({ gameManager }: { gameManager: GameManager }
         <div className="space-y-6">
             {/* Walkable Stations panel */}
             {!gameManager.game.currentTrain && gameManager.game.currentStation.walkable &&
-                <div className="bg-white p-4 rounded-lg shadow-sm">
+                <div className="bg-white p-4 rounded-lg shadow-lg border-2">
                     <h2 className="text-lg font-semibold text-gray-900 mb-2">Available Platforms</h2>
                     <div className="space-y-1 text-gray-800">
                         {gameManager.game.currentStation.walkable.map(stationId => {
@@ -52,7 +52,7 @@ export default function GameScreen({ gameManager }: { gameManager: GameManager }
 
             {/* Upcoming arrivals panel */}
             {gameManager.game.playerMode === 'station' &&
-                < div className="bg-white p-4 rounded-lg shadow-sm">
+                < div className="bg-white p-4 rounded-lg shadow-lg border-2">
                     <h2 className="text-lg font-semibold text-gray-900 mb-2">Upcoming Arrivals</h2>
                     {arrivals.length === 0 ? (
                         <p className="text-gray-700">No scheduled trains found.</p>
@@ -80,6 +80,8 @@ export default function GameScreen({ gameManager }: { gameManager: GameManager }
                     )}
                 </div>
             }
+
+
 
             {/* Train mode panel*/}
             {gameManager.game.playerMode === 'train' && gameManager.game.currentTrain && (
@@ -116,7 +118,7 @@ export default function GameScreen({ gameManager }: { gameManager: GameManager }
                     }
 
                     return (
-                        <div className="bg-white p-4 rounded-lg shadow-sm mt-4">
+                        <div className="bg-white p-4 rounded-lg shadow-lg border-2 mt-4">
                             <h2 className="text-lg font-semibold text-gray-900 mb-2">Upcoming Stops</h2>
                             {upcomingStops.length === 0 ? (
                                 <p className="text-gray-700">End of line.</p>
