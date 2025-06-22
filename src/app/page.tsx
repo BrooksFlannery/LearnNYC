@@ -5,13 +5,13 @@ import { CharacterScreen } from "~/components/character-screen";
 import GameScreen from "~/components/GameScreen";
 import { Logout } from "~/components/logout";
 import SubwayMap from "~/components/SubwayMap";
-import { useGame } from "~/hooks/useGame";
+import { useGameState } from "~/hooks/useGameState";
 import { clientChatApi } from "~/lib/api";
 import type { CharacterData, GameManager } from "~/lib/definitions/types";
 
 export default function Home() {
 
-  const gameManager: GameManager = useGame();
+  const gameManager: GameManager = useGameState();
 
   const [characters, setCharacters] = useState<CharacterData[] | null>(null);
   const api = new clientChatApi();
@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <main className="h-screen w-screen flex flex-col overflow-hidden bg-gradient-to-b from-gray-50 to-gray-100">
 
-      <header className="p-4 bg-white shadow-sm text-center flex justify-between border-b-2">
+      <header className="p-2 bg-white flex justify-between border-2">
         <h1 className="text-3xl font-bold text-gray-900">Learn New York City</h1>
         <Logout />
       </header>
@@ -59,6 +59,5 @@ export default function Home() {
       </div>
     </main>
   )
-
 
 }

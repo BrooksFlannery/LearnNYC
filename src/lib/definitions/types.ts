@@ -9,15 +9,6 @@ export type CharacterData = z.infer<typeof characterSchema>
 
 export type QuestionSchema = z.infer<typeof questionSchema>
 
-type MultipleChoiceQuestion = {//couldnt this just be QuestionSchema | choices: string[] or something like that
-    id: string;
-    question: string;
-    correctAnswer: string;
-    choices: string[]; // shuffled list including correct + 3 wrongs
-    characterId: string;
-    difficulty: number;
-};
-
 
 //SUBWAY TYPES
 
@@ -62,5 +53,5 @@ export type GameManager = {
     exitTrain: (train: Train) => void;
     boardTrain: (train: Train) => void;
     advanceTurn: () => void;
-    characterTrigger: number; // increments when a new character should be shown
+    characterTrigger: number; //hacky and bs i hate this
 }
