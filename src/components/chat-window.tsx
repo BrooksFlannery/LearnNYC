@@ -1,6 +1,6 @@
 'use client'
 import { Card, CardContent } from "~/components/ui/card"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { Loader2 } from "lucide-react"
 import { useChat } from '@ai-sdk/react'
 import type { CharacterData } from '~/lib/definitions/types'
@@ -8,7 +8,31 @@ import { Button } from "./ui/button"
 import Image from "next/image"
 
 export function ChatWindow({ character, onAdvanceTurn }: { character: CharacterData; onAdvanceTurn?: () => void }) {
+    const starterBehaviors = [
+        "STARTING BEHAVIOR: Ask a rhetorical question about the city or life.",
+        "STARTING BEHAVIOR: Make a bold opinionated statement and wait for disagreement.",
+        "STARTING BEHAVIOR: Reflect on something you overheard earlier today.",
+        "STARTING BEHAVIOR: Complain lightly about something mundane.",
+        "STARTING BEHAVIOR: Mention a strange dream you had recently.",
+        "STARTING BEHAVIOR: Pose a philosophical question with no obvious answer.",
+        "STARTING BEHAVIOR: Bring up a memory that’s on your mind.",
+        "STARTING BEHAVIOR: Start mid-thought as if the conversation already began.",
+        "STARTING BEHAVIOR: Accuse the user (jokingly or not) of looking suspiciously familiar.",
+        "STARTING BEHAVIOR: Say something cryptic and let them figure it out.",
+        "STARTING BEHAVIOR: Admit something odd about your mood today.",
+        "STARTING BEHAVIOR: Make up a rumor you 'heard' and ask what they think.",
+        "STARTING BEHAVIOR: Say what you would do if you ran this city.",
+        "STARTING BEHAVIOR: State something confidently that might not be true.",
+        "STARTING BEHAVIOR: Speak as if the user asked you a question — they didn’t.",
+        "STARTING BEHAVIOR: Ask what time it is, then ignore the answer.",
+        "STARTING BEHAVIOR: Talk about a rule you always follow, even if no one else does.",
+        "STARTING BEHAVIOR: Confess something small, like a guilty pleasure.",
+        "STARTING BEHAVIOR: Pretend the user just interrupted your train of thought.",
+    ]
 
+    const randomStarter = useRef(
+        starterBehaviors[Math.floor(Math.random() * starterBehaviors.length)]
+    ).current
     const { messages, input, handleInputChange, handleSubmit, append } = useChat({
         api: `/api/characters/chat`,
         body: {
@@ -18,7 +42,22 @@ export function ChatWindow({ character, onAdvanceTurn }: { character: CharacterD
             {
                 id: 'system-1',
                 role: 'system',
-                content: character.prompt + "FACT: you are on the Subway with the user. RULES: you are not allowed to use emojis.",
+                content: `
+                ${character.prompt}
+
+
+                SCENE:
+                You are on the NYC Subway with the user.
+
+                ${randomStarter}
+
+                RULES:
+                - Always stay in character.
+                - Don't get tripped up on user typos
+                - Do not use emojis.
+                - Respond naturally and conversationally.
+                - Ask the user questions occasionally to keep the dialogue going.
+      `.trim()
             },
         ]
     })
@@ -32,7 +71,7 @@ export function ChatWindow({ character, onAdvanceTurn }: { character: CharacterD
             append({
                 role: 'user',
                 id: 'user-init',
-                content: 'The user cant see this message, you need to introduce yourself where you are from.'
+                content: 'The user cant see this message, you need to talk to them in a way that would make sense if you were approaching a stranger.'
             })
         }, 5)
         return () => clearTimeout(timer)
