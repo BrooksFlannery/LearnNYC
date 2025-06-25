@@ -2,9 +2,8 @@
 
 import { Flag, MapPin } from 'lucide-react';
 import { useMemo } from 'react';
-import { REAL_STATIONS } from '~/lib/data/realStations';
 import type { GameManager, Station } from '~/lib/definitions/types';
-import { buildLineGraph, buildStationGraph, computeArrivalsForStation } from '~/lib/stationUtils';
+import { buildLineGraph, buildStationGraph, computeArrivalsForStation, buildComplexGraph } from '~/lib/stationUtils';
 
 export default function GameScreen({ gameManager }: { gameManager: GameManager }) {
     if (!gameManager.game) {
@@ -15,6 +14,7 @@ export default function GameScreen({ gameManager }: { gameManager: GameManager }
 
     const lineMap = useMemo(() => buildLineGraph(), []);
     const stationMap = useMemo(() => buildStationGraph(), []);
+    const complexMap = useMemo(() => buildComplexGraph(), []);
 
     const arrivals = useMemo(() => {
         if (!gameManager.game) return [];
@@ -28,14 +28,26 @@ export default function GameScreen({ gameManager }: { gameManager: GameManager }
     return (
         <div className="space-y-6">
             {/* Walkable Stations panel */}
-            {!gameManager.game.currentTrain && gameManager.game.currentStation.walkable &&
-                <div className="bg-white p-4 rounded-lg shadow-lg border-2">
-                    <h2 className="text-lg font-semibold text-gray-900 mb-2">Available Platforms</h2>
-                    <div className="space-y-1 text-gray-800">
-                        {gameManager.game.currentStation.walkable.map(stationId => {
-                            const station = REAL_STATIONS.find(s => s.id === stationId);
-                            if (!station) return null;
-                            return (
+            {!gameManager.game.currentTrain && (() => {
+                const current = gameManager.game.currentStation;
+                const currentComplexId = current.complexId;
+                if (!currentComplexId) return null;
+
+                const complex = complexMap.get(currentComplexId);
+                if (!complex) return null;
+
+                const walkableStations = complex.stationIds
+                    .filter(id => id !== current.id)
+                    .map(id => stationMap.get(id)!)
+                    .filter((s): s is Station => !!s);
+
+                if (walkableStations.length === 0) return null;
+
+                return (
+                    <div className="bg-white p-4 rounded-lg shadow-lg border-2">
+                        <h2 className="text-lg font-semibold text-gray-900 mb-2">Available Platforms</h2>
+                        <div className="space-y-1 text-gray-800">
+                            {walkableStations.map((station) => (
                                 <button
                                     key={station.id}
                                     className="bg-blue-400 hover:bg-blue-500 text-white px-4 py-2 rounded w-full text-left"
@@ -43,11 +55,11 @@ export default function GameScreen({ gameManager }: { gameManager: GameManager }
                                 >
                                     {`Walk to ${station.name}`}
                                 </button>
-                            );
-                        })}
+                            ))}
+                        </div>
                     </div>
-                </div>
-            }
+                );
+            })()}
 
 
             {/* Upcoming arrivals panel */}

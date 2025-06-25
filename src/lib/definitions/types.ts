@@ -31,7 +31,7 @@ export type TrainLine = {
 export type Station = {
     id: string,
     name: string,
-    walkable?: string[];
+    complexId: string;
     lines: TrainLine['id'][];
     borough?: "Queens" | "Brooklyn" | "Manhattan" | "Staten Island" | "Bronx";
     coordinates: { x: number; y: number };
@@ -55,3 +55,8 @@ export type GameManager = {
     advanceTurn: () => void;
     characterTrigger: number; //hacky and bs i hate this
 }
+
+export type StationComplex = {
+    id: string;
+    stationIds: readonly Station['id'][];
+};
