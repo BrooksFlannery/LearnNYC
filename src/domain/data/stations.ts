@@ -1,4 +1,4 @@
-import type { Station } from "../definitions/types";
+import type { Station } from "~/lib/definitions/types";
 
 export const REAL_STATIONS: Station[] = [
   {

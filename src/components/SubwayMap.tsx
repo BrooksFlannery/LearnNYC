@@ -1,7 +1,7 @@
 'use client';
 
 import { Flag, MapPin } from "lucide-react";
-import { REAL_STATIONS } from "~/lib/data/stations";
+import { REAL_STATIONS } from "~/domain/data/stations";
 import type { GameManager } from "~/lib/definitions/types";
 
 

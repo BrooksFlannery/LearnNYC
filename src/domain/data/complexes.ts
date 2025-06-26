@@ -1,7 +1,5 @@
-// AUTO-GENERATED FILE – run npm run convert:complexes to regenerate
-// 2025-06-22T17:43:48.562Z
+import type { StationComplex } from "~/lib/definitions/types";
 
-import type { StationComplex } from "../definitions/types";
 
 export const COMPLEXES: readonly StationComplex[] = [
   {
