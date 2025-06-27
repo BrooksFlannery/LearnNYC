@@ -9,7 +9,7 @@ import { Providers } from "~/components/providers"
 export const metadata: Metadata = {
   title: "LearnNYC",
   description: "Learn New York City with the help of some fun characters",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/SubwayTrain.svg" }],
 };
 
 const geist = Geist({

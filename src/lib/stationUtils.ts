@@ -216,8 +216,8 @@ export function buildAdjacencyGraph(): Map<string, Neighbor[]> {
                 const from = ids[i]!;
                 const to = ids[j]!;
                 if (!adjacency.has(from) || !adjacency.has(to)) continue;
-                adjacency.get(from)!.push({ id: to, weight: 5 });
-                adjacency.get(to)!.push({ id: from, weight: 5 });
+                adjacency.get(from)!.push({ id: to, weight: 3 });
+                adjacency.get(to)!.push({ id: from, weight: 3 });
             }
         }
     });
@@ -227,6 +227,9 @@ export function buildAdjacencyGraph(): Map<string, Neighbor[]> {
 }
 
 //maybe this should be a map?? maybe all my maps should get built and stored in gamestate?
+//also should change this to return an array of stations and if we find a singular station with that name 
+//and that station is in a complex with other stations we return all stations in comples(or just ones w shared names???)
+//we will need to change Shortest path alg to allow multiple endStations though
 export function findStationByName(name: string): { station: Station | null; ambiguous: boolean } {
     const needle = name.trim().toLowerCase();
     if (!needle) return { station: null, ambiguous: false };

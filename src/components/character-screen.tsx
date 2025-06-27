@@ -4,6 +4,7 @@ import type { CharacterData } from "~/lib/definitions/types";
 import { ChatWindow } from "./chat-window";
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
+import { GOD_MODE } from "~/lib/godMode";
 
 export function CharacterScreen({ characters, onAdvanceTurn, characterTrigger }: { characters: CharacterData[] | null; onAdvanceTurn?: () => void; characterTrigger: number }) {
     const [character, setCharacter] = useState<CharacterData | null>(null);
@@ -17,6 +18,8 @@ export function CharacterScreen({ characters, onAdvanceTurn, characterTrigger }:
             }
         }
     }, [characters, characterTrigger]);
+
+    if (GOD_MODE) return null;
 
     if (!character) {
         return (

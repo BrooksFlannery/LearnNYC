@@ -1,5 +1,6 @@
 import { buildStationGraph, buildLineGraph, seedTrains } from "~/lib/stationUtils";
 import type { GameState, Station, Train, TrainLine } from "~/lib/definitions/types";
+import { GOD_MODE } from "~/lib/godMode";
 
 const stationMap = buildStationGraph();
 const lineMap = buildLineGraph();
@@ -33,9 +34,13 @@ export function advanceTurn(state: GameState): GameState {
 export function makeMove(state: GameState, nextStationId: string): GameState {
     const nextStation = stationMap.get(nextStationId);
     if (!nextStation) return state;
-    const currentComplex = state.currentStation.complexId;
-    const nextComplex = nextStation.complexId;
-    if (!currentComplex || currentComplex !== nextComplex) return state;
+
+    if (!GOD_MODE) {
+        const currentComplex = state.currentStation.complexId;
+        const nextComplex = nextStation.complexId;
+        if (!currentComplex || currentComplex !== nextComplex) return state;
+    }
+
     return {
         ...state,
         currentStation: nextStation,

@@ -5,7 +5,6 @@ export const COMPLEXES: readonly StationComplex[] = [
   {
     "id": "complex-1",
     "stationIds": [
-      "station-1",
       "station-270",
       "station-271",
       "station-272",
@@ -543,7 +542,6 @@ export const COMPLEXES: readonly StationComplex[] = [
     "stationIds": [
       "station-340",
       "station-341",
-      "station-357",
       "station-78",
       "station-79",
       "station-80"
@@ -1425,6 +1423,13 @@ export const COMPLEXES: readonly StationComplex[] = [
     "stationIds": [
       "station-931",
       "station-932"
+    ]
+  },
+  {
+    "id": "complex-174",
+    "stationIds": [
+      "station-627",
+      "station-1750230970192"
     ]
   }
 ] as const;

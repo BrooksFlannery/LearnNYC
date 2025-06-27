@@ -2,16 +2,6 @@ import type { Station } from "~/lib/definitions/types";
 
 export const REAL_STATIONS: Station[] = [
   {
-    "id": "station-1",
-    "name": "Canal St",
-    "coordinates": {
-      "x": 443.342,
-      "y": 1691.5
-    },
-    "lines": [],
-    "complexId": "complex-1"
-  },
-  {
     "id": "station-2",
     "name": "Sheepshead Bay",
     "coordinates": {
@@ -65,7 +55,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-75",
-    "name": "14 St–Union Sq",
+    "name": "14 St-Union Sq",
     "coordinates": {
       "x": 532.74,
       "y": 1420.59
@@ -78,7 +68,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-76",
-    "name": "14 St–Union Sq",
+    "name": "14 St-Union Sq",
     "coordinates": {
       "x": 546.883,
       "y": 1406.448
@@ -91,7 +81,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-77",
-    "name": "14 St–Union Sq",
+    "name": "14 St-Union Sq",
     "coordinates": {
       "x": 539.812,
       "y": 1413.519
@@ -119,7 +109,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-79",
-    "name": "14 St",
+    "name": "14 St-6 Av",
     "coordinates": {
       "x": 463.342,
       "y": 1409.667
@@ -132,7 +122,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-80",
-    "name": "14 St–6 Av",
+    "name": "14 St-6 Av",
     "coordinates": {
       "x": 453.343,
       "y": 1409.667
@@ -147,7 +137,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-81",
-    "name": "34 St–Herald Sq",
+    "name": "34 St-Herald Sq",
     "coordinates": {
       "x": 463.342,
       "y": 1292.909
@@ -160,7 +150,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-82",
-    "name": "34 St–Herald Sq",
+    "name": "34 St-Herald Sq",
     "coordinates": {
       "x": 453.343,
       "y": 1292.908
@@ -175,7 +165,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-83",
-    "name": "Lawrence St–MetroTech",
+    "name": "Lawrence St-MetroTech",
     "coordinates": {
       "x": 886.999,
       "y": 1850
@@ -188,7 +178,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-84",
-    "name": "Jay St–MetroTech",
+    "name": "Jay St-MetroTech",
     "coordinates": {
       "x": 886.999,
       "y": 1840
@@ -270,7 +260,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-113",
-    "name": "Times Sq–42 St",
+    "name": "Times Sq-42 St",
     "coordinates": {
       "x": 334.339,
       "y": 1221.096
@@ -283,7 +273,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-114",
-    "name": "Times Sq–42 St",
+    "name": "Times Sq-42 St",
     "coordinates": {
       "x": 344.339,
       "y": 1221.096
@@ -298,7 +288,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-115",
-    "name": "Times Sq–42 St",
+    "name": "Times Sq-42 St",
     "coordinates": {
       "x": 364.339,
       "y": 1221.096
@@ -315,7 +305,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-116",
-    "name": "Times Sq–42 St",
+    "name": "Times Sq-42 St",
     "coordinates": {
       "x": 354.339,
       "y": 1221.096
@@ -356,7 +346,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-119",
-    "name": "66 St–Lincoln Center",
+    "name": "66 St-Lincoln Center",
     "coordinates": {
       "x": 182.57,
       "y": 1012.764
@@ -425,7 +415,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-128",
-    "name": "168 St",
+    "name": "Washington Heights-168 St",
     "coordinates": {
       "x": 176.179,
       "y": 449.981
@@ -438,7 +428,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-129",
-    "name": "168 St",
+    "name": "Washington Heights-168 St",
     "coordinates": {
       "x": 169.107,
       "y": 457.052
@@ -498,7 +488,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-137",
-    "name": "DeKalb Avenue",
+    "name": "DeKalb Av",
     "coordinates": {
       "x": 954.808,
       "y": 1849.192
@@ -524,7 +514,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-139",
-    "name": "Pacific",
+    "name": "Pacific St",
     "coordinates": {
       "x": 963.762,
       "y": 1982.75
@@ -537,7 +527,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-144",
-    "name": "Atlantic Av–Barclays Ctr",
+    "name": "Pacific St",
     "coordinates": {
       "x": 993.763,
       "y": 1982.75
@@ -589,7 +579,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-148",
-    "name": "Chambers St–West Broadway",
+    "name": "Chambers St-West Broadway",
     "coordinates": {
       "x": 364.231,
       "y": 1695.184
@@ -604,7 +594,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-149",
-    "name": "59 St–Columbus Circle",
+    "name": "59 St-Columbus Circle",
     "coordinates": {
       "x": 231.306,
       "y": 1061.5
@@ -617,7 +607,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-150",
-    "name": "59 St–Columbus Circle",
+    "name": "59 St-Columbus Circle",
     "coordinates": {
       "x": 251.306,
       "y": 1043.5
@@ -634,7 +624,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-151",
-    "name": "59 St–Columbus Circle",
+    "name": "59 St-Columbus Circle",
     "coordinates": {
       "x": 271.306,
       "y": 1043.5
@@ -647,7 +637,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-152",
-    "name": "59 St–Columbus Circle",
+    "name": "59 St-Columbus Circle",
     "coordinates": {
       "x": 261.306,
       "y": 1043.5
@@ -660,7 +650,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-153",
-    "name": "59 St–Columbus Circle",
+    "name": "59 St-Columbus Circle",
     "coordinates": {
       "x": 241.306,
       "y": 1043.5
@@ -673,7 +663,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-154",
-    "name": "155 St",
+    "name": "155 St-8 Av",
     "coordinates": {
       "x": 284.687,
       "y": 515.353
@@ -686,7 +676,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-155",
-    "name": "155 St (8 Av)",
+    "name": "155 St-8 Av",
     "coordinates": {
       "x": 291.759,
       "y": 522.424
@@ -699,7 +689,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-156",
-    "name": "155 St",
+    "name": "St Nick St-155 St",
     "coordinates": {
       "x": 236.758,
       "y": 510.536
@@ -712,7 +702,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-157",
-    "name": "163 St–Amsterdam Av",
+    "name": "Amsterdam Av-163 St",
     "coordinates": {
       "x": 206.536,
       "y": 480.314
@@ -751,7 +741,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-164",
-    "name": "Atlantic Av–Barclays Ctr",
+    "name": "Atlantic Av",
     "coordinates": {
       "x": 1075.176,
       "y": 1955.159
@@ -764,7 +754,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-169",
-    "name": "Atlantic Av–Barclays Ctr",
+    "name": "Atlantic Av",
     "coordinates": {
       "x": 1089.318,
       "y": 1941.017
@@ -779,7 +769,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-170",
-    "name": "Atlantic Av–Barclays Ctr",
+    "name": "Atlantic Av",
     "coordinates": {
       "x": 1082.246,
       "y": 1948.087
@@ -796,7 +786,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-171",
-    "name": "Pacific Street",
+    "name": "Atlantic Av",
     "coordinates": {
       "x": 1068.104,
       "y": 1962.229
@@ -865,7 +855,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-180",
-    "name": "Eastern Pkwy–Brooklyn Museum",
+    "name": "Eastern Pkwy-Brooklyn Museum",
     "coordinates": {
       "x": 1236.571,
       "y": 2052.572
@@ -880,7 +870,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-185",
-    "name": "Jay St–MetroTech",
+    "name": "Jay St-MetroTech",
     "coordinates": {
       "x": 825.064,
       "y": 1829
@@ -897,7 +887,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-186",
-    "name": "Jay St–MetroTech",
+    "name": "Jay St-MetroTech",
     "coordinates": {
       "x": 845.064,
       "y": 1829
@@ -910,7 +900,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-187",
-    "name": "Jay St–MetroTech",
+    "name": "Jay St-MetroTech",
     "coordinates": {
       "x": 835.064,
       "y": 1829
@@ -923,7 +913,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-188",
-    "name": "Hoyt–Schermerhorn Sts",
+    "name": "Hoyt-Schermerhorn Sts",
     "coordinates": {
       "x": 873,
       "y": 1949.24
@@ -949,7 +939,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-190",
-    "name": "Hoyt–Schermerhorn Sts",
+    "name": "Hoyt-Schermerhorn Sts",
     "coordinates": {
       "x": 873,
       "y": 1959.24
@@ -966,7 +956,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-191",
-    "name": "W 4 St–Wash Sq",
+    "name": "W 4 St-Wash Sq",
     "coordinates": {
       "x": 443.342,
       "y": 1520.665
@@ -981,7 +971,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-192",
-    "name": "W 4 St–Washington Sq",
+    "name": "W 4 St-Washington Sq",
     "coordinates": {
       "x": 463.342,
       "y": 1520.665
@@ -994,7 +984,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-193",
-    "name": "W 4 St–Wash Sq",
+    "name": "W 4 St-Wash Sq",
     "coordinates": {
       "x": 453.342,
       "y": 1520.665
@@ -1009,7 +999,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-194",
-    "name": "W 4 St–Wash Sq",
+    "name": "W 4 St-Wash Sq",
     "coordinates": {
       "x": 433.342,
       "y": 1520.665
@@ -1073,7 +1063,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-198",
-    "name": "Court St–Borough Hall",
+    "name": "Court St-Borough Hall",
     "coordinates": {
       "x": 787.501,
       "y": 1896.999
@@ -1088,7 +1078,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-203",
-    "name": "Court St",
+    "name": "Court St-Borough Hall",
     "coordinates": {
       "x": 787.501,
       "y": 1876.999
@@ -1101,7 +1091,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-204",
-    "name": "Borough Hall",
+    "name": "Court St-Borough Hall",
     "coordinates": {
       "x": 787.499,
       "y": 1906.999
@@ -1118,7 +1108,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-205",
-    "name": "Court–Borough Hall",
+    "name": "Court St-Borough Hall",
     "coordinates": {
       "x": 787.499,
       "y": 1886.999
@@ -1196,7 +1186,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-211",
-    "name": "Far Rockaway–Mott Av",
+    "name": "Far Rockaway-Mott Av",
     "coordinates": {
       "x": 2471.734,
       "y": 1600.734
@@ -1245,7 +1235,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-215",
-    "name": "Jackson Heights–Roosevelt Av",
+    "name": "Jackson Heights-Roosevelt Av",
     "coordinates": {
       "x": 1271.666,
       "y": 913.001
@@ -1258,7 +1248,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-216",
-    "name": "Jackson Hts–Roosevelt Av",
+    "name": "Jackson Heights-Roosevelt Av",
     "coordinates": {
       "x": 1271.666,
       "y": 893.001
@@ -1268,7 +1258,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-217",
-    "name": "Jackson Hts-Roosevelt Av",
+    "name": "Jackson Heights-Roosevelt Av",
     "coordinates": {
       "x": 1271.666,
       "y": 873.001
@@ -1281,7 +1271,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-218",
-    "name": "Jackson Heights–Roosevelt Av",
+    "name": "Jackson Heights-Roosevelt Av",
     "coordinates": {
       "x": 1271.666,
       "y": 883.001
@@ -1294,7 +1284,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-219",
-    "name": "Jackson Hts–Roosevelt Av",
+    "name": "Jackson Heights-Roosevelt Av",
     "coordinates": {
       "x": 1271.666,
       "y": 903.001
@@ -1307,7 +1297,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-220",
-    "name": "74-Broadway/Roosevelt Av",
+    "name": "74 St-Broadway",
     "coordinates": {
       "x": 1287.666,
       "y": 930.677
@@ -1405,7 +1395,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-228",
-    "name": "Grand Av–Newtown",
+    "name": "Grand Av-Newtown",
     "coordinates": {
       "x": 1473.75,
       "y": 920.834
@@ -1428,7 +1418,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-230",
-    "name": "Grand Av–Newtown",
+    "name": "Grand Av-Newtown",
     "coordinates": {
       "x": 1473.75,
       "y": 910.834
@@ -1477,7 +1467,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-234",
-    "name": "63 Dr–Rego Park",
+    "name": "63 Dr-Rego Park",
     "coordinates": {
       "x": 1581.125,
       "y": 920.834
@@ -1500,7 +1490,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-236",
-    "name": "63 Dr–Rego Park",
+    "name": "63 Dr-Rego Park",
     "coordinates": {
       "x": 1581.125,
       "y": 910.834
@@ -1549,7 +1539,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-240",
-    "name": "Forest Hills–71 Av",
+    "name": "Forest Hills-71 Av",
     "coordinates": {
       "x": 1702.5,
       "y": 940.333
@@ -1562,7 +1552,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-241",
-    "name": "Forest Hills–71 Av",
+    "name": "Forest Hills-71 Av",
     "coordinates": {
       "x": 1702.5,
       "y": 920.333
@@ -1585,7 +1575,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-243",
-    "name": "Forest Hills–71 Av",
+    "name": "Forest Hills-71 Av",
     "coordinates": {
       "x": 1702.5,
       "y": 910.333
@@ -1598,7 +1588,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-244",
-    "name": "Forest Hills–71 Av",
+    "name": "Forest Hills-71 Av",
     "coordinates": {
       "x": 1702.5,
       "y": 930.333
@@ -1611,7 +1601,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-245",
-    "name": "Jamaica–Van Wyck",
+    "name": "Jamaica Av-Van Wyck Blvd",
     "coordinates": {
       "x": 1928.737,
       "y": 996.597
@@ -1624,7 +1614,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-246",
-    "name": "Church Avenue",
+    "name": "Church Av",
     "coordinates": {
       "x": 1281.744,
       "y": 2188.1
@@ -1676,7 +1666,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-254",
-    "name": "Court Sq-23 St",
+    "name": "Long Island City-Court Sq",
     "coordinates": {
       "x": 852.585,
       "y": 1132.084
@@ -1745,7 +1735,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-259",
-    "name": "42 St–Port Authority Bus Terminal",
+    "name": "42 St-Port Authority Bus Terminal",
     "coordinates": {
       "x": 251.393,
       "y": 1221.096
@@ -1762,7 +1752,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-260",
-    "name": "42 St–Port Authority Bus Terminal",
+    "name": "42 St-Port Authority Bus Terminal",
     "coordinates": {
       "x": 261.393,
       "y": 1221.096
@@ -1777,7 +1767,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-261",
-    "name": "57 St–7 Av",
+    "name": "57 St-7 Av",
     "coordinates": {
       "x": 364.339,
       "y": 1099.668
@@ -1794,7 +1784,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-262",
-    "name": "57 St–7 Av",
+    "name": "57 St-7 Av",
     "coordinates": {
       "x": 354.339,
       "y": 1099.668
@@ -1869,7 +1859,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-267",
-    "name": "Whitehall St–South Ferry",
+    "name": "Whitehall St-South Ferry",
     "coordinates": {
       "x": 529.25,
       "y": 1876.999
@@ -1895,7 +1885,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-269",
-    "name": "South Ferry",
+    "name": "Whitehall St-South Ferry",
     "coordinates": {
       "x": 468.979,
       "y": 1896.205
@@ -1908,7 +1898,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-270",
-    "name": "Park Pl–World Trade Center",
+    "name": "Park Pl-World Trade Center",
     "coordinates": {
       "x": 473.12,
       "y": 1713.426
@@ -1979,7 +1969,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-275",
-    "name": "14 St",
+    "name": "14 St-8 Av",
     "coordinates": {
       "x": 251.393,
       "y": 1398.333
@@ -2034,7 +2024,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-279",
-    "name": "Delancey St–Essex St",
+    "name": "Delancey St-Essex St",
     "coordinates": {
       "x": 735.237,
       "y": 1571
@@ -2047,7 +2037,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-280",
-    "name": "138 St–Grand Concourse",
+    "name": "138 St-Grand Concourse",
     "coordinates": {
       "x": 605.123,
       "y": 601.5
@@ -2060,7 +2050,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-281",
-    "name": "138 St–Grand Concourse",
+    "name": "138 St-Grand Concourse",
     "coordinates": {
       "x": 615.123,
       "y": 601.499
@@ -2075,7 +2065,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-282",
-    "name": "149 St–Grand Concourse",
+    "name": "149 St-Grand Concourse",
     "coordinates": {
       "x": 624.5,
       "y": 558.5
@@ -2088,7 +2078,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-283",
-    "name": "149 St–Grand Concourse",
+    "name": "149 St-Grand Concourse",
     "coordinates": {
       "x": 624.501,
       "y": 568.5
@@ -2186,7 +2176,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-290",
-    "name": "42 St–Bryant Pk",
+    "name": "42 St-Bryant Pk",
     "coordinates": {
       "x": 453.342,
       "y": 1200.667
@@ -2201,7 +2191,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-291",
-    "name": "42 St–Bryant Park",
+    "name": "42 St-Bryant Park",
     "coordinates": {
       "x": 463.342,
       "y": 1200.667
@@ -2268,7 +2258,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-296",
-    "name": "8 St–NYU",
+    "name": "8 St-NYU",
     "coordinates": {
       "x": 555.669,
       "y": 1453.001
@@ -2281,7 +2271,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-297",
-    "name": "8 St–NYU",
+    "name": "8 St-NYU",
     "coordinates": {
       "x": 545.668,
       "y": 1453.001
@@ -2562,7 +2552,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-318",
-    "name": "Grand Central–42 St",
+    "name": "Grand Central-42 St",
     "coordinates": {
       "x": 605.531,
       "y": 1221.096
@@ -2579,7 +2569,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-319",
-    "name": "Grand Central–42 St",
+    "name": "Grand Central-42 St",
     "coordinates": {
       "x": 615.531,
       "y": 1221.096
@@ -2594,7 +2584,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-320",
-    "name": "Grand Central",
+    "name": "Grand Central-42 St",
     "coordinates": {
       "x": 592,
       "y": 1221.096
@@ -2622,7 +2612,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-322",
-    "name": "14 St–Union Sq",
+    "name": "14 St-Union Sq",
     "coordinates": {
       "x": 585.123,
       "y": 1409
@@ -2639,7 +2629,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-323",
-    "name": "14 St–Union Sq",
+    "name": "14 St-Union Sq",
     "coordinates": {
       "x": 595.123,
       "y": 1409
@@ -2756,7 +2746,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-332",
-    "name": "Fulton St",
+    "name": "Broadway-Nassau St",
     "coordinates": {
       "x": 589.5,
       "y": 1759.668
@@ -2773,7 +2763,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-333",
-    "name": "Fulton St",
+    "name": "Broadway-Nassau St",
     "coordinates": {
       "x": 589.5,
       "y": 1749.668
@@ -2813,7 +2803,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-336",
-    "name": "23 St–Ely Av",
+    "name": "23 St",
     "coordinates": {
       "x": 778,
       "y": 1137.667
@@ -2841,7 +2831,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-338",
-    "name": "Brooklyn Bridge–City Hall",
+    "name": "Brooklyn Bridge-Chambers St",
     "coordinates": {
       "x": 595.123,
       "y": 1678.5
@@ -2856,7 +2846,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-339",
-    "name": "Brooklyn Bridge–City Hall",
+    "name": "Brooklyn Bridge-Chambers St",
     "coordinates": {
       "x": 585.123,
       "y": 1678.5
@@ -2873,7 +2863,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-340",
-    "name": "14 St–6 Av",
+    "name": "14 St",
     "coordinates": {
       "x": 344.338,
       "y": 1409.334
@@ -3045,18 +3035,8 @@ export const REAL_STATIONS: Station[] = [
     "complexId": ""
   },
   {
-    "id": "station-357",
-    "name": "station-357",
-    "coordinates": {
-      "x": 443.343,
-      "y": 1409.667
-    },
-    "lines": [],
-    "complexId": "complex-60"
-  },
-  {
     "id": "station-361",
-    "name": "34 St–Herald Sq",
+    "name": "34 St-Herald Sq",
     "coordinates": {
       "x": 432.967,
       "y": 1292.533
@@ -3069,7 +3049,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-362",
-    "name": "34 St–Herald Sq",
+    "name": "34 St-Herald Sq",
     "coordinates": {
       "x": 425.896,
       "y": 1299.603
@@ -3084,7 +3064,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-363",
-    "name": "34 St–Herald Sq",
+    "name": "34 St-Herald Sq",
     "coordinates": {
       "x": 418.825,
       "y": 1306.674
@@ -3302,7 +3282,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-378",
-    "name": "Lexington Av–59 St",
+    "name": "Lexington Av-59 St",
     "coordinates": {
       "x": 626.75,
       "y": 1065.046
@@ -3319,7 +3299,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-379",
-    "name": "45 Rd-Court House Sq",
+    "name": "45 Rd",
     "coordinates": {
       "x": 847,
       "y": 1175
@@ -3375,7 +3355,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-383",
-    "name": "47–50 Sts–Rockefeller Ctr",
+    "name": "47-50 Sts-Rockefeller Center",
     "coordinates": {
       "x": 453.342,
       "y": 1157.667
@@ -3390,7 +3370,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-384",
-    "name": "47–50 Sts–Rockefeller Center",
+    "name": "47-50 Sts-Rockefeller Center",
     "coordinates": {
       "x": 463.342,
       "y": 1157.667
@@ -3403,7 +3383,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-385",
-    "name": "149 St–Grand Concourse",
+    "name": "149 St-Grand Concourse",
     "coordinates": {
       "x": 599.474,
       "y": 537.027
@@ -3416,7 +3396,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-386",
-    "name": "161 St–Yankee Stadium",
+    "name": "161 St-Yankee Stadium",
     "coordinates": {
       "x": 492.777,
       "y": 446.187
@@ -3429,7 +3409,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-387",
-    "name": "161 St–Yankee Stadium",
+    "name": "161 St-Yankee Stadium",
     "coordinates": {
       "x": 492.776,
       "y": 456.187
@@ -3442,7 +3422,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-388",
-    "name": "161 St–Yankee Stadium",
+    "name": "161 St-Yankee Stadium",
     "coordinates": {
       "x": 529.777,
       "y": 467.328
@@ -3455,7 +3435,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-389",
-    "name": "Franklin Av",
+    "name": "Franklin Av-Fulton St",
     "coordinates": {
       "x": 1265.996,
       "y": 1861.664
@@ -3468,7 +3448,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-390",
-    "name": "Fulton St",
+    "name": "Franklin Av-Fulton St",
     "coordinates": {
       "x": 1271.002,
       "y": 1888
@@ -3494,7 +3474,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-392",
-    "name": "Franklin Av–Medgar Evers College",
+    "name": "Franklin Av",
     "coordinates": {
       "x": 1283.25,
       "y": 1991.75
@@ -3511,7 +3491,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-393",
-    "name": "Franklin Av–Medgar Evers College",
+    "name": "Franklin Av",
     "coordinates": {
       "x": 1290.321,
       "y": 1998.82
@@ -3627,7 +3607,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-401",
-    "name": "Christopher St–Stonewall",
+    "name": "Christopher St-Stonewall",
     "coordinates": {
       "x": 334.339,
       "y": 1477.866
@@ -3653,7 +3633,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-403",
-    "name": "34 St–Penn Station",
+    "name": "34 St-Penn Station",
     "coordinates": {
       "x": 344.059,
       "y": 1298
@@ -3668,7 +3648,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-404",
-    "name": "34 St–Penn Station",
+    "name": "34 St-Penn Station",
     "coordinates": {
       "x": 334.06,
       "y": 1298
@@ -3681,7 +3661,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-405",
-    "name": "34 St–Penn Station",
+    "name": "34 St-Penn Station",
     "coordinates": {
       "x": 261.393,
       "y": 1298
@@ -3696,7 +3676,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-406",
-    "name": "34 St–Penn Station",
+    "name": "34 St-Penn Station",
     "coordinates": {
       "x": 251.393,
       "y": 1298
@@ -3726,7 +3706,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-408",
-    "name": "Broadway–Lafayette St",
+    "name": "Broadway-Lafayette St",
     "coordinates": {
       "x": 621.333,
       "y": 1527.669
@@ -3739,7 +3719,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-409",
-    "name": "Broadway–Lafayette St",
+    "name": "Broadway-Lafayette St",
     "coordinates": {
       "x": 621.333,
       "y": 1537.669
@@ -3889,7 +3869,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-420",
-    "name": "Smith–9 St",
+    "name": "Smith-9 St",
     "coordinates": {
       "x": 861.667,
       "y": 2086.997
@@ -3915,7 +3895,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-422",
-    "name": "4 Av–9 St",
+    "name": "4 Av-9 St",
     "coordinates": {
       "x": 942.668,
       "y": 2086.997
@@ -3941,7 +3921,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-424",
-    "name": "4 Av–9 St",
+    "name": "4 Av-9 St",
     "coordinates": {
       "x": 963.763,
       "y": 2069.335
@@ -3954,7 +3934,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-425",
-    "name": "4 Av–9 St",
+    "name": "4 Av-9 St",
     "coordinates": {
       "x": 993.762,
       "y": 2069.335
@@ -4045,7 +4025,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-432",
-    "name": "Kensington–Church Av",
+    "name": "Kensington-Church Av",
     "coordinates": {
       "x": 1174.668,
       "y": 2243.997
@@ -4177,7 +4157,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-442",
-    "name": "Rockaway Park–Beach 116 St",
+    "name": "Rockaway Park-Beach 116 St",
     "coordinates": {
       "x": 2257.138,
       "y": 1829.473
@@ -4190,7 +4170,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-443",
-    "name": "Rockaway Park–Beach 116 St",
+    "name": "Rockaway Park-Beach 116 St",
     "coordinates": {
       "x": 2250.067,
       "y": 1822.402
@@ -4203,7 +4183,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-444",
-    "name": "W 8 St–NY Aquarium",
+    "name": "West 8 St-NY Aquarium",
     "coordinates": {
       "x": 1435.997,
       "y": 2541.997
@@ -4216,7 +4196,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-445",
-    "name": "West 8 St–NY Aquarium",
+    "name": "West 8 St-NY Aquarium",
     "coordinates": {
       "x": 1428.927,
       "y": 2534.927
@@ -4229,7 +4209,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-446",
-    "name": "Coney Island–Stillwell Av",
+    "name": "Coney Island-Stillwell Av",
     "coordinates": {
       "x": 1381.927,
       "y": 2581.927
@@ -4255,7 +4235,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-448",
-    "name": "Coney Island–Stillwell Av",
+    "name": "Coney Island-Stillwell Av",
     "coordinates": {
       "x": 1388.997,
       "y": 2588.997
@@ -4268,7 +4248,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-449",
-    "name": "Coney Island–Stillwell Av",
+    "name": "Coney Island-Stillwell Av",
     "coordinates": {
       "x": 1367.786,
       "y": 2567.786
@@ -4710,7 +4690,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-495",
-    "name": "Newkirk Plaza",
+    "name": "Newkirk Av",
     "coordinates": {
       "x": 1362.069,
       "y": 2264.72
@@ -4723,7 +4703,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-500",
-    "name": "Newkirk Avenue",
+    "name": "Newkirk Av",
     "coordinates": {
       "x": 1354.998,
       "y": 2271.791
@@ -4814,7 +4794,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-511",
-    "name": "Kings Highway",
+    "name": "Kings Hwy",
     "coordinates": {
       "x": 1454.288,
       "y": 2371.081
@@ -4998,7 +4978,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-525",
-    "name": "81 St–Museum of Natural History",
+    "name": "81 St-Museum of Natural History",
     "coordinates": {
       "x": 271.59,
       "y": 888.5
@@ -5011,7 +4991,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-526",
-    "name": "81 St–Museum of Natural History",
+    "name": "81 St-Museum of Natural History",
     "coordinates": {
       "x": 261.59,
       "y": 888.5
@@ -5102,7 +5082,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-533",
-    "name": "110 St–Cathedral Pkwy",
+    "name": "Cathedral Pkwy-110 St",
     "coordinates": {
       "x": 271.725,
       "y": 726.281
@@ -5115,7 +5095,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-534",
-    "name": "Cathedral Pkwy (110 St)",
+    "name": "Cathedral Pkwy-110 St",
     "coordinates": {
       "x": 261.725,
       "y": 726.281
@@ -5154,7 +5134,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-537",
-    "name": "68 St–Hunter College",
+    "name": "68 St-Hunter College",
     "coordinates": {
       "x": 615.123,
       "y": 970
@@ -5376,7 +5356,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-551",
-    "name": "Inwood–207 St",
+    "name": "Inwood-207 St",
     "coordinates": {
       "x": 129.394,
       "y": 300.893
@@ -5393,7 +5373,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-552",
-    "name": "168 St",
+    "name": "Washington Heights-168 St",
     "coordinates": {
       "x": 146.139,
       "y": 460.333
@@ -5471,7 +5451,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-558",
-    "name": "Marble Hill–225 St",
+    "name": "Marble Hill-225 St",
     "coordinates": {
       "x": 202.265,
       "y": 218.333
@@ -5510,7 +5490,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-561",
-    "name": "Van Cortlandt Park–242 St",
+    "name": "Van Cortlandt Park-242 St",
     "coordinates": {
       "x": 202.265,
       "y": 132
@@ -5549,7 +5529,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-568",
-    "name": "182–183 Sts",
+    "name": "182-183 Sts",
     "coordinates": {
       "x": 631,
       "y": 275.786
@@ -5562,7 +5542,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-573",
-    "name": "182–183 Sts",
+    "name": "182-183 Sts",
     "coordinates": {
       "x": 621,
       "y": 275.786
@@ -5601,7 +5581,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-580",
-    "name": "174–175 Sts",
+    "name": "174-175 Sts",
     "coordinates": {
       "x": 631,
       "y": 352.643
@@ -5614,7 +5594,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-585",
-    "name": "174–175 Sts",
+    "name": "174-175 Sts",
     "coordinates": {
       "x": 621,
       "y": 352.643
@@ -5731,7 +5711,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-610",
-    "name": "Norwood–205 St",
+    "name": "Norwood-205 St",
     "coordinates": {
       "x": 653,
       "y": 118
@@ -5772,7 +5752,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-613",
-    "name": "Flatbush Av–Brooklyn College",
+    "name": "Flatbush Av-Brooklyn College",
     "coordinates": {
       "x": 1512.749,
       "y": 2088.752
@@ -5787,7 +5767,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-614",
-    "name": "Flatbush Av–Brooklyn College",
+    "name": "Flatbush Av-Brooklyn College",
     "coordinates": {
       "x": 1505.677,
       "y": 2095.823
@@ -5912,7 +5892,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-623",
-    "name": "Newkirk Av–Little Haiti",
+    "name": "Newkirk Av-Little Haiti",
     "coordinates": {
       "x": 1491.374,
       "y": 2067.377
@@ -5927,7 +5907,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-624",
-    "name": "Newkirk Av–Little Haiti",
+    "name": "Newkirk Av-Little Haiti",
     "coordinates": {
       "x": 1484.302,
       "y": 2074.448
@@ -5966,7 +5946,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-627",
-    "name": "Crown Hts–Utica Av",
+    "name": "Crown Hts-Utica Av",
     "coordinates": {
       "x": 1490.071,
       "y": 1799.071
@@ -5975,11 +5955,11 @@ export const REAL_STATIONS: Station[] = [
       "line-3-2",
       "line-3"
     ],
-    "complexId": ""
+    "complexId": "complex-174"
   },
   {
     "id": "station-628",
-    "name": "Sutter Av–Rutland Rd",
+    "name": "Sutter Av-Rutland Rd",
     "coordinates": {
       "x": 1538.5,
       "y": 1785.821
@@ -6057,7 +6037,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-634",
-    "name": "New Lots Av",
+    "name": "East New York-New Lots Av",
     "coordinates": {
       "x": 1753.66,
       "y": 1603.66
@@ -6272,7 +6252,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-651",
-    "name": "Sutphin Blvd-Archer Av",
+    "name": "Sutphin Blvd-JFK Airport",
     "coordinates": {
       "x": 1968.593,
       "y": 1017.593
@@ -6313,7 +6293,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-654",
-    "name": "Sutphin Blvd JFK Airport",
+    "name": "Sutphin Blvd-JFK Airport",
     "coordinates": {
       "x": 1961.522,
       "y": 1010.521
@@ -6544,7 +6524,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-671",
-    "name": "Forest Pkwy",
+    "name": "85 St-Forest Pkwy",
     "coordinates": {
       "x": 1733.499,
       "y": 1220.999
@@ -6721,7 +6701,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-684",
-    "name": "Fulton St",
+    "name": "CrescentSt-Fulton St",
     "coordinates": {
       "x": 1738.266,
       "y": 1374.767
@@ -6736,7 +6716,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-685",
-    "name": "Crescent St",
+    "name": "Crescent St-Fulton St",
     "coordinates": {
       "x": 1731.194,
       "y": 1367.696
@@ -6855,7 +6835,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-694",
-    "name": "DeKalb Av",
+    "name": "De Kalb Av",
     "coordinates": {
       "x": 1316.333,
       "y": 1398.271
@@ -6972,7 +6952,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-703",
-    "name": "Myrtle–Wyckoff Avs",
+    "name": "Myrtle-Wyckoff Avs",
     "coordinates": {
       "x": 1438.5,
       "y": 1414.5
@@ -7084,7 +7064,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-711",
-    "name": "Kingston–Throop Avs",
+    "name": "Kingston-Throop Avs",
     "coordinates": {
       "x": 1359.156,
       "y": 1768.342
@@ -7214,7 +7194,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-721",
-    "name": "Clinton–Washington Avs",
+    "name": "Clinton-Washington Avs",
     "coordinates": {
       "x": 1241.497,
       "y": 1886.163
@@ -7390,7 +7370,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-733",
-    "name": "Ozone Park–Lefferts Blvd",
+    "name": "Ozone Park-Lefferts Blvd",
     "coordinates": {
       "x": 1976.601,
       "y": 1223.934
@@ -7403,7 +7383,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-734",
-    "name": "Kew Gardens–Union Tpke",
+    "name": "75 Av",
     "coordinates": {
       "x": 1734.5,
       "y": 930.333
@@ -7416,7 +7396,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-735",
-    "name": "Sutphin Blvd",
+    "name": "Briarwood-Van Wyck Blvd",
     "coordinates": {
       "x": 1837.5,
       "y": 930.333
@@ -7442,7 +7422,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-737",
-    "name": "Briarwood",
+    "name": "Briarwood-Van Wyck Blvd",
     "coordinates": {
       "x": 1837.5,
       "y": 940.333
@@ -7455,7 +7435,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-738",
-    "name": "Kew Gardens–Union Tpke",
+    "name": "Kew Gardens-Union Tpke",
     "coordinates": {
       "x": 1783,
       "y": 940.333
@@ -7468,7 +7448,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-739",
-    "name": "Briarwood",
+    "name": "Kew Gardens-Union Tpke",
     "coordinates": {
       "x": 1783,
       "y": 930.333
@@ -7507,7 +7487,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-742",
-    "name": "Jamaica–179 St",
+    "name": "Jamaica-179 St",
     "coordinates": {
       "x": 2038.167,
       "y": 831.169
@@ -7533,7 +7513,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-744",
-    "name": "Aqueduct–North Conduit Av",
+    "name": "Aqueduct-North Conduit Av",
     "coordinates": {
       "x": 2046.267,
       "y": 1390.535
@@ -7587,7 +7567,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-748",
-    "name": "Middle Village–Metropolitan Av",
+    "name": "Middle Village-Metropolitan Av",
     "coordinates": {
       "x": 1455,
       "y": 1208
@@ -7647,7 +7627,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-752",
-    "name": "Delancey St–Essex St",
+    "name": "Delancey St-Essex St",
     "coordinates": {
       "x": 756.75,
       "y": 1581
@@ -7724,7 +7704,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-757",
-    "name": "Brooklyn Bridge–Chambers",
+    "name": "Brooklyn Bridge-Chambers St",
     "coordinates": {
       "x": 622,
       "y": 1681.666
@@ -7737,7 +7717,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-758",
-    "name": "Brooklyn Bridge-City Hall",
+    "name": "Brooklyn Bridge-Chambers St",
     "coordinates": {
       "x": 632,
       "y": 1681.666
@@ -7754,7 +7734,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-759",
-    "name": "Jamaica Center-Parsons/Archer",
+    "name": "Jamaica Center-Parsons Blvd",
     "coordinates": {
       "x": 2012.093,
       "y": 974.092
@@ -7767,7 +7747,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-760",
-    "name": "Jamaica Center-Parsons/Archer",
+    "name": "Jamaica Center-Parsons Blvd",
     "coordinates": {
       "x": 2019.164,
       "y": 981.164
@@ -7782,7 +7762,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-761",
-    "name": "Jamaica Center–Parsons/Archer",
+    "name": "Jamaica Center-Parsons Blvd",
     "coordinates": {
       "x": 2005.022,
       "y": 967.021
@@ -7940,7 +7920,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-773",
-    "name": "39 Av–Dutch Kills",
+    "name": "39 Av-Dutch Kills",
     "coordinates": {
       "x": 849.998,
       "y": 990.5
@@ -8015,7 +7995,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-778",
-    "name": "Astoria–Ditmars Blvd",
+    "name": "Astoria-Ditmars Blvd",
     "coordinates": {
       "x": 849.998,
       "y": 820
@@ -8030,7 +8010,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-779",
-    "name": "Central Park North–110 St",
+    "name": "Central Park North-110 St",
     "coordinates": {
       "x": 454.988,
       "y": 722.333
@@ -8090,7 +8070,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-783",
-    "name": "Harlem–148 St",
+    "name": "Harlem-148 St",
     "coordinates": {
       "x": 389,
       "y": 574.32
@@ -8116,7 +8096,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-785",
-    "name": "Broad",
+    "name": "Broad St",
     "coordinates": {
       "x": 622,
       "y": 1835.334
@@ -8129,7 +8109,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-786",
-    "name": "Fulton",
+    "name": "Fulton St",
     "coordinates": {
       "x": 622,
       "y": 1770.5
@@ -8224,7 +8204,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-813",
-    "name": "137 St–City College",
+    "name": "137 St-City College",
     "coordinates": {
       "x": 146.14,
       "y": 633.067
@@ -8250,7 +8230,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-815",
-    "name": "116 St–Columbia University",
+    "name": "116 St-Columbia University",
     "coordinates": {
       "x": 146.14,
       "y": 691.468
@@ -8263,7 +8243,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-816",
-    "name": "Cathedral Pkwy (110 St)",
+    "name": "Cathedral Pkwy-110 St",
     "coordinates": {
       "x": 146.14,
       "y": 730.667
@@ -8401,7 +8381,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-826",
-    "name": "3 Av–149 St",
+    "name": "3 Av-149 St",
     "coordinates": {
       "x": 673.668,
       "y": 558.5
@@ -8414,7 +8394,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-827",
-    "name": "3 Av–149 St",
+    "name": "3 Av-149 St",
     "coordinates": {
       "x": 673.669,
       "y": 568.5
@@ -8429,7 +8409,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-828",
-    "name": "West Farms Sq–E Tremont Av",
+    "name": "West Farms Sq-E Tremont Av",
     "coordinates": {
       "x": 871,
       "y": 320.791
@@ -8442,7 +8422,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-829",
-    "name": "West Farms Sq–E Tremont Av",
+    "name": "West Farms Sq-E Tremont Av",
     "coordinates": {
       "x": 881,
       "y": 320.79
@@ -8617,7 +8597,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-842",
-    "name": "Wakefield–241 St",
+    "name": "Wakefield-241 St",
     "coordinates": {
       "x": 792.544,
       "y": 32.592
@@ -8682,7 +8662,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-847",
-    "name": "Eastchester–Dyre Av",
+    "name": "Eastchester-Dyre Av",
     "coordinates": {
       "x": 881,
       "y": 67.5
@@ -8747,7 +8727,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-852",
-    "name": "Bedford Park Blvd–Lehman College",
+    "name": "Bedford Park Blvd-Lehman College",
     "coordinates": {
       "x": 537.612,
       "y": 175.25
@@ -8838,7 +8818,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-859",
-    "name": "3 Av–138 St",
+    "name": "3 Av-138 St",
     "coordinates": {
       "x": 673.668,
       "y": 597.403
@@ -8905,7 +8885,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-864",
-    "name": "E 143 St–St Mary’s St",
+    "name": "E 143 St-St Mary’s St",
     "coordinates": {
       "x": 899,
       "y": 577
@@ -8996,7 +8976,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-871",
-    "name": "Morrison Av–Sound View",
+    "name": "Morrison Av-Sound View",
     "coordinates": {
       "x": 954.376,
       "y": 353.125
@@ -9100,7 +9080,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-879",
-    "name": "Westchester Sq–E Tremont Av",
+    "name": "Westchester Sq-E Tremont Av",
     "coordinates": {
       "x": 1066.554,
       "y": 226.807
@@ -9113,7 +9093,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-880",
-    "name": "Westchester Sq–E Tremont Av",
+    "name": "Westchester Sq-E Tremont Av",
     "coordinates": {
       "x": 1073.626,
       "y": 233.876
@@ -9476,7 +9456,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-927",
-    "name": "Canal",
+    "name": "Canal St",
     "coordinates": {
       "x": 622,
       "y": 1632.5
@@ -9534,7 +9514,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-931",
-    "name": "Howard Beach–JFK Airport",
+    "name": "Howard Beach-JFK Airport",
     "coordinates": {
       "x": 2099.617,
       "y": 1443.884
@@ -9577,7 +9557,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-1750230970192",
-    "name": "Crown Hts–Utica Av",
+    "name": "Crown Hts-Utica Av",
     "coordinates": {
       "x": 1483.0960083007812,
       "y": 1791.9039916992188
@@ -9586,7 +9566,7 @@ export const REAL_STATIONS: Station[] = [
       "line-4-2",
       "line-4"
     ],
-    "complexId": ""
+    "complexId": "complex-174"
   },
   {
     "id": "station-1750236137800",
@@ -9603,7 +9583,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-1750236574366",
-    "name": "Bay Ridge–95 St",
+    "name": "Bay Ridge-95 St",
     "coordinates": {
       "x": 1056.3098204170935,
       "y": 2566.5188580951176
@@ -9655,7 +9635,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-1750237092018",
-    "name": "Bensonhurst–Bay Pkwy",
+    "name": "Bensonhurst-Bay Pkwy",
     "coordinates": {
       "x": 1253.0391845703125,
       "y": 2535.021

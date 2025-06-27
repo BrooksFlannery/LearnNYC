@@ -3,6 +3,8 @@
 import { Flag, MapPin } from "lucide-react";
 import { REAL_STATIONS } from "~/domain/data/stations";
 import type { GameManager } from "~/lib/definitions/types";
+import { GOD_MODE } from "~/lib/godMode";
+import { useGodMode } from "~/contexts/GodModeContext";
 
 
 export default function SubwayMap({ gameManager }: { gameManager: GameManager }) {
@@ -21,6 +23,8 @@ export default function SubwayMap({ gameManager }: { gameManager: GameManager })
         }
         : { x: 0, y: 0 };
 
+    const { showStationNames } = useGodMode();
+
     if (!gameManager.game) {
         return (
             <div>Loadding spinner goes here...</div>
@@ -30,23 +34,25 @@ export default function SubwayMap({ gameManager }: { gameManager: GameManager })
     return (
         <div className="w-full h-full relative">
             {/* Map interaction overlay – top right */}
-            <div className="absolute top-0 right-0 p-4 flex flex-col gap-4 items-end pointer-events-none z-10 w-fit">
-                {/* Current Station */}
-                <div className="w-full flex items-center gap-2 bg-white px-4 py-3 rounded-lg shadow-lg border-2 backdrop-blur-md pointer-events-auto">
-                    <MapPin className="w-5 h-5 text-blue-500" />
-                    <span className="font-medium text-gray-700 text-sm text-right">
-                        Current Station: {gameManager.game.currentStation.name}
-                    </span>
-                </div>
+            {!GOD_MODE && (
+                <div className="absolute top-0 right-0 p-4 flex flex-col gap-4 items-end pointer-events-none z-10 w-fit">
+                    {/* Current Station */}
+                    <div className="w-full flex items-center gap-2 bg-white px-4 py-3 rounded-lg shadow-lg border-2 backdrop-blur-md pointer-events-auto">
+                        <MapPin className="w-5 h-5 text-blue-500" />
+                        <span className="font-medium text-gray-700 text-sm text-right">
+                            Current Station: {gameManager.game.currentStation.name}
+                        </span>
+                    </div>
 
-                {/* Goal Station */}
-                <div className="w-full flex items-center gap-2 bg-white px-4 py-3 rounded-lg shadow-lg border-2 backdrop-blur-md pointer-events-auto">
-                    <Flag className="w-5 h-5 text-green-500" />
-                    <span className="font-medium text-gray-700 text-sm text-right">
-                        Destination: {gameManager.game.destinationStation.name}
-                    </span>
+                    {/* Goal Station */}
+                    <div className="w-full flex items-center gap-2 bg-white px-4 py-3 rounded-lg shadow-lg border-2 backdrop-blur-md pointer-events-auto">
+                        <Flag className="w-5 h-5 text-green-500" />
+                        <span className="font-medium text-gray-700 text-sm text-right">
+                            Destination: {gameManager.game.destinationStation.name}
+                        </span>
+                    </div>
                 </div>
-            </div>
+            )}
 
 
             <svg viewBox={`0 0 ${ZOOM_WIDTH} ${ZOOM_HEIGHT}`} className="w-full h-full">
@@ -74,11 +80,13 @@ export default function SubwayMap({ gameManager }: { gameManager: GameManager })
                                 <g
                                     key={station.id}
                                     onClick={() => {
-                                        if (isAvailable) {
+                                        if (GOD_MODE) {
+                                            gameManager.makeMove(station);
+                                        } else if (isAvailable) {
                                             gameManager.makeMove(station);
                                         }
                                     }}
-                                    style={{ cursor: isAvailable ? "pointer" : "default" }}
+                                    style={{ cursor: GOD_MODE || isAvailable ? "pointer" : "default" }}
                                 >
                                     <circle
                                         cx={station.coordinates.x}
@@ -89,13 +97,24 @@ export default function SubwayMap({ gameManager }: { gameManager: GameManager })
                                         strokeWidth={2}
                                         className="transition-all duration-200"
                                     />
+                                    {GOD_MODE && showStationNames && (
+                                        <text
+                                            x={station.coordinates.x + 10}
+                                            y={station.coordinates.y - 10}
+                                            fontSize={10}
+                                            fill="#000"
+                                            style={{ pointerEvents: 'none' }}
+                                        >
+                                            {station.name}
+                                        </text>
+                                    )}
                                 </g>
                             );
                         });
                     })()}
 
                     {/* Draw trains */}
-                    {gameManager.game.trains.map(train => {
+                    {!GOD_MODE && gameManager.game.trains.map(train => {
                         const isAvailable = train.currentStation.id === gameManager.game?.currentStation.id;
 
                         return (
