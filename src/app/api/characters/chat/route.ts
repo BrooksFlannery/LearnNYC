@@ -49,6 +49,7 @@ export async function POST(req: Request) {
 
         const game = gameStore.getState();
         const start = game.currentStation;
+        console.log(game)
 
         const path = shortestPath(start, dest);
 
