@@ -5,7 +5,7 @@ import { db } from '~/db/drizzle'
 import { character, question } from '~/db/schema';
 import { eq } from 'drizzle-orm';
 import { shortestPath, findStationByName } from '~/lib/stationUtils';
-import { gameStore } from '~/server/stores/game';
+import { gameService } from '~/server/services/gameService';
 
 export const maxDuration = 30;
 
@@ -46,8 +46,7 @@ export async function POST(req: Request) {
             return `Hmm, I don't know any station called "${location}".`;
         }
 
-
-        const game = gameStore.getState();
+        const game = await gameService.getState();
         const start = game.currentStation;
         console.log(game)
 

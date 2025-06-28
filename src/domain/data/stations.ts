@@ -6634,7 +6634,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-679",
-    "name": "Myrtle Av",
+    "name": "Myrtle Av-Broadway",
     "coordinates": {
       "x": 1276,
       "y": 1591
@@ -6649,7 +6649,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-680",
-    "name": "Myrtle Av",
+    "name": "Myrtle Av-Broadway",
     "coordinates": {
       "x": 1276,
       "y": 1571
@@ -6662,7 +6662,7 @@ export const REAL_STATIONS: Station[] = [
   },
   {
     "id": "station-681",
-    "name": "Myrtle Av",
+    "name": "Myrtle Av-Broadway",
     "coordinates": {
       "x": 1276,
       "y": 1581
