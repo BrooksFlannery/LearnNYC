@@ -4,7 +4,6 @@ import { eq } from "drizzle-orm";
 import type { GameState } from "~/lib/definitions/types";
 
 const cache = new Map<string, GameState>();
-export const DEFAULT_USER = "anonymous";
 
 async function fetchByUserId(userId: string): Promise<GameState | undefined> {
     const cached = cache.get(userId);

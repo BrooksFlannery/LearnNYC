@@ -122,7 +122,6 @@ export default function SubwayMap({ gameManager }: { gameManager: GameManager })
                                 key={train.id}
                                 onClick={() => {
                                     if (isAvailable) {
-                                        console.log("boarding", train.id);
                                         gameManager.boardTrain(train);
                                     }
                                 }}

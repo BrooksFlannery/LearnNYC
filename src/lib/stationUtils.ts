@@ -231,10 +231,10 @@ export function buildAdjacencyGraph(): Map<string, Neighbor[]> {
 //and that station is in a complex with other stations we return all stations in comples(or just ones w shared names???)
 //we will need to change Shortest path alg to allow multiple endStations though
 export function findStationByName(name: string): { station: Station | null; ambiguous: boolean } {
-    const needle = name.trim().toLowerCase();
-    if (!needle) return { station: null, ambiguous: false };
+    const target = name.trim().toLowerCase();
+    if (!target) return { station: null, ambiguous: false };
 
-    const matches = REAL_STATIONS.filter(st => st.name.toLowerCase() === needle);
+    const matches = REAL_STATIONS.filter(st => st.name.toLowerCase() === target);
     if (matches.length === 0) {
         return { station: null, ambiguous: false };
     }
