@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, boolean, uuid, varchar, pgEnum, integer } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean, uuid, varchar, pgEnum, integer, jsonb } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 
 
@@ -69,4 +69,12 @@ export const question = pgTable("question", {
     difficultyRange: sql`CHECK (${table.difficulty} BETWEEN 1 AND 100)`,
 }));
 
-export const schema = { user, session, account, verification }
+export const gameState = pgTable("game_state", {
+    id: uuid("id").default(sql`gen_random_uuid()`).primaryKey(),
+    userId: text("user_id").notNull(),
+    state: jsonb("state").notNull(),
+    createdAt: timestamp("created_at").$defaultFn(() => new Date()).notNull(),
+    updatedAt: timestamp("updated_at").$defaultFn(() => new Date()).notNull(),
+});
+
+export const schema = { user, session, account, verification, character, question, gameState }

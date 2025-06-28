@@ -1,27 +1,27 @@
 import { z } from "zod";
 import { router, publicProcedure } from "~/server/trpc";
-import { gameStore } from "~/server/stores/game";
+import { gameService } from "~/server/services/gameService";
 
 
 export const gameRouter = router({
-    getState: publicProcedure.query(({ ctx }) => {
-        return gameStore.getState(ctx.userId);
+    getState: publicProcedure.query(async ({ ctx }) => {
+        return await gameService.getState(ctx.userId);
     }),
     makeMove: publicProcedure
         .input(z.object({ nextStationId: z.string() }))
-        .mutation(({ ctx, input }) => {
-            return gameStore.makeMove(ctx.userId, input.nextStationId);
+        .mutation(async ({ ctx, input }) => {
+            return await gameService.makeMove(ctx.userId, input.nextStationId);
         }),
     boardTrain: publicProcedure
         .input(z.object({ trainId: z.string() }))
-        .mutation(({ ctx, input }) => {
-            return gameStore.boardTrain(ctx.userId, input.trainId);
+        .mutation(async ({ ctx, input }) => {
+            return await gameService.boardTrain(ctx.userId, input.trainId);
         }),
-    exitTrain: publicProcedure.mutation(({ ctx }) => {
-        return gameStore.exitTrain(ctx.userId);
+    exitTrain: publicProcedure.mutation(async ({ ctx }) => {
+        return await gameService.exitTrain(ctx.userId);
     }),
-    advanceTurn: publicProcedure.mutation(({ ctx }) => {
-        return gameStore.advanceTurn(ctx.userId);
+    advanceTurn: publicProcedure.mutation(async ({ ctx }) => {
+        return await gameService.advanceTurn(ctx.userId);
     }),
 });
 
