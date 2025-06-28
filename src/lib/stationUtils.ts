@@ -41,13 +41,11 @@ export function getRandomStationPair(): { start: Station; end: Station } {
 }
 export function seedTrains(): Train[] {
     const totalTrains: Train[] = []
-    let totalTrainId = 1
     const minSkip = 5;
     const maxSkip = 8;
 
     allLines.forEach((line) => {
-        totalTrains.push(seedTrain(line, 0, totalTrainId));
-        totalTrainId++;
+        totalTrains.push(seedTrain(line, 0));
 
         let currentStationIndex = 0;
         while (currentStationIndex < line.line.length - 1) {
@@ -55,8 +53,7 @@ export function seedTrains(): Train[] {
             currentStationIndex += skip;
 
             if (currentStationIndex < line.line.length) {
-                totalTrains.push(seedTrain(line, currentStationIndex, totalTrainId));
-                totalTrainId++;
+                totalTrains.push(seedTrain(line, currentStationIndex));
             }
         }
     });
@@ -64,13 +61,13 @@ export function seedTrains(): Train[] {
     return totalTrains;
 }
 
-function seedTrain(line: TrainLine, stationIndex: number, id: number): Train {
+function seedTrain(line: TrainLine, stationIndex: number): Train {
     const stationId = line.line[stationIndex];
     const newTrain: Train = {
         currentStation: REAL_STATIONS.find(station => station.id === stationId)!,
         nextArrivalTurn: 1,
         line: line,
-        id: `train-${id}`,
+        id: `train-${typeof globalThis !== 'undefined' && globalThis.crypto && 'randomUUID' in globalThis.crypto ? (globalThis.crypto as Crypto).randomUUID() : Math.random().toString(36).slice(2)}`,
         isAtStation: true,
     }
     return newTrain

@@ -1,4 +1,5 @@
 import { buildStationGraph, buildLineGraph, seedTrains } from "~/lib/stationUtils";
+import { randomUUID } from "crypto";
 import type { GameState, Station, Train, TrainLine } from "~/lib/definitions/types";
 import { GOD_MODE } from "~/lib/godMode";
 
@@ -70,7 +71,15 @@ export function exitTrain(state: GameState): GameState {
     };
 }
 
-let nextTrainIdCounter = 1000;
+// Generate a globally-unique train id. Using UUID avoids collisions that
+// can happen if the serverless function is re-initialised (which resets any
+// in-memory counters) while a previous game instance already contains ids
+// like `train-1045`.
+function generateTrainId() {
+    return `train-${randomUUID()}`;
+}
+
+// (incremental counter removed – we now rely on UUIDs for uniqueness)
 
 export function tickTrains(state: GameState): GameState {
     const updatedTrains: Train[] = [];
@@ -94,7 +103,7 @@ export function tickTrains(state: GameState): GameState {
                     currentStation: firstStation,
                     nextArrivalTurn: 1,
                     line: train.line,
-                    id: `train-${nextTrainIdCounter++}`,
+                    id: generateTrainId(),
                     isAtStation: true,
                 });
             }
