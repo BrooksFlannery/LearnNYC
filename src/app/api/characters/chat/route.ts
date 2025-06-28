@@ -6,6 +6,7 @@ import { character, question } from '~/db/schema';
 import { eq } from 'drizzle-orm';
 import { shortestPath, findStationByName } from '~/lib/stationUtils';
 import { gameService } from '~/server/services/gameService';
+import { auth } from '~/lib/auth';
 
 export const maxDuration = 30;
 
@@ -46,7 +47,11 @@ export async function POST(req: Request) {
             return `Hmm, I don't know any station called "${location}".`;
         }
 
-        const game = await gameService.getState();
+        // Map directions need to be scoped to the current user's game
+        const session = await auth.api.getSession({ headers: req.headers });
+        const userId = session?.user?.id;
+
+        const game = await gameService.getState(userId);
         const start = game.currentStation;
         console.log(game)
 
