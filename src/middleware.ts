@@ -12,5 +12,9 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/", "/api/character", "/api/character/:path*"], // Specify the routes the middleware applies to
+    matcher: [
+        "/", // Home page
+        "/api/characters", "/api/characters/:path*", // Character data & chat
+        "/api/trpc/:path*", // All tRPC endpoints (game state)
+    ],
 };

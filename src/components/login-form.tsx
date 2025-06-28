@@ -24,14 +24,14 @@ import {
 } from "~/components/ui/form"
 import { Input } from "~/components/ui/input"
 import { toast } from "sonner"
+import { signIn } from "~/server/authActions"
+import { useState } from "react"
+import { Loader2 } from "lucide-react"
 
 const formSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
 })
-import { signIn } from "~/server/server"
-import { useState } from "react"
-import { Loader2 } from "lucide-react"
 
 export function LoginForm(props: React.ComponentProps<"div">) {
   const [isLoading, setIsLoading] = useState(false)

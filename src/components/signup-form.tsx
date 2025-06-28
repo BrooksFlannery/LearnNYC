@@ -16,7 +16,7 @@ import {
     FormLabel,
     FormMessage,
 } from "~/components/ui/form"
-import { signUp } from "~/server/server"
+import { signUp } from "~/server/authActions"
 import { toast } from "sonner"
 import { useState } from "react"
 import { Loader2 } from "lucide-react"

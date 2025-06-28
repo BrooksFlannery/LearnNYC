@@ -47,11 +47,14 @@ This document walks through the **frontend → backend → database → backend 
 3. **Next.js** catches the request in `app/api/trpc/[trpc]/route.ts` and hands it to `appRouter`.
 4. `appRouter` delegates to **`gameRouter.getState`** (a tRPC procedure).
 5. The procedure calls **`gameService.getState(ctx.userId)`**.
-6. `gameService` performs "load-or-create":
-   1. Ask **`gameRepo.fetchByUserId(key)`** for the current row.
+6. `gameService` performs "load-or-create" **for the authenticated user only**:
+   1. Ask **`gameRepo.fetchByUserId(userId)`** for the current row.
    2. `gameRepo` looks in its in-memory `Map` cache → if miss → runs `SELECT … WHERE user_id = $1`.
    3. Row found → parse JSON → return it.
-   4. Row missing → call **`engine.createNewGame()`** → **`gameRepo.save()`** (JSON.stringify + `INSERT`) → return the fresh state.
+   4. Row missing → call **`engine.createNewGame()`** → **`gameRepo.save()`** → return the fresh state.
+
+   > Anonymous fallback was removed in May&nbsp;2025: every request must carry a valid Better-Auth session cookie.
+
 7. The **`GameState`** object bubbles back up the stack to the React hook, which updates the React-Query cache → components re-render.
 
 Mutations (`makeMove`, `boardTrain`, `exitTrain`, `advanceTurn`) follow the same path but with extra steps inside `gameService`:
@@ -64,7 +67,7 @@ load state → engine.<action>() → engine.tickTrains() → repo.save() → ret
 
 ## 4. Caching behaviour
 
-* A **single row per user** (or the shared key `"anonymous"`) is stored in Postgres.
+* A **single row per user** is stored in Postgres. There is no longer an "anonymous" shared record; requests without a session are redirected to `/login` by `middleware.ts`.
 * `gameRepo` keeps a per-process `Map` cache for hot reads/writes.
 * On cold starts or cross-region traffic the cache is empty; the repo automatically falls back to the database and repopulates.
 
@@ -91,5 +94,5 @@ npm run db:migrate # run hand-written SQL files in /migrations
 | add a new field to saved state            | `lib/definitions/types.ts` **and** `db/schema.ts` |
 | expose a new API endpoint                 | `server/routers/` + `services/`                   |
 | integrate another client (CLI, mobile…)   | call `gameService` directly or add another router |
-| plug in real authentication               | `middleware.ts` + `app/api/trpc/[trpc]/route.ts`  |
+| plug in real authentication               | `middleware.ts` + `app/api/trpc/[trpc]/route.ts` + `app/api/characters/chat/route.ts` |
 

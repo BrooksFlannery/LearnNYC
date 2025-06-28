@@ -11,23 +11,28 @@ import { auth } from '~/lib/auth';
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
+    // Ensure the caller is authenticated – Better-Auth stores the session in cookies.
+    const session = await auth.api.getSession({ headers: req.headers });
+    if (!session?.user?.id) {
+        return new Response("Unauthenticated", { status: 401 });
+    }
+
+    const userId = session.user.id;
+
     const { messages, characterId } = await req.json();
 
     async function giveQuestion() {
-        console.log('GIVE QUESTION for characterId:', characterId)
+        //
         const questions = await db
             .select()
             .from(question)
             .where(eq(question.characterId, characterId));
-
-        console.log('Found questions:', questions.length);
 
         if (!questions || questions.length === 0) {
             return 'Actually im all out of questions, you win!';
         }
 
         const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
-        console.log('Selected question:', JSON.stringify(randomQuestion));
         return JSON.stringify(randomQuestion);
     }
 
@@ -35,6 +40,7 @@ export async function POST(req: Request) {
 
         const { station: dest, ambiguous } = findStationByName(location);
 
+        //we should maybe search through array of stations once we refactor to allow for arrays and ask which line they are talking about specifically(must eliminate complex over lap though)
         if (ambiguous) {
             return `There are multiple stations named "${location}" on different lines. Could you be more specific?`;
         }
@@ -47,20 +53,14 @@ export async function POST(req: Request) {
             return `Hmm, I don't know any station called "${location}".`;
         }
 
-        // Map directions need to be scoped to the current user's game
-        const session = await auth.api.getSession({ headers: req.headers });
-        const userId = session?.user?.id;
-
         const game = await gameService.getState(userId);
         const start = game.currentStation;
-        console.log(game)
 
         const path = shortestPath(start, dest);
 
         if (path.length === 0) {
             return `I couldn't find a route from ${start.name} to ${dest.name}.`;
         }
-        console.log(path)
 
         const route = path.map(s => s.name).join(' → ');
         return `From ${start.name}, take the following route: ${route}. Good luck!`;
@@ -76,10 +76,9 @@ export async function POST(req: Request) {
                 description: "Call this when a user asks for directions. Pass ONLY the location name as userMessage",
                 //shape and type of data the tool expects
                 parameters: z.object({
-                    location: z.string().describe('The location name only. For example: "Central Park", "Prospect Ave", "Union Square"'),
+                    location: z.string().describe('The location name only. For example: "Myrtle-Wyckoff Avs", "De Kalb Av", "Myrtle Av-Broadway"'),
                 }),
                 execute: async ({ location }) => {
-                    console.log("asked for directions to", location);
                     return giveDirections(location)
                 }
             }),
@@ -89,8 +88,6 @@ export async function POST(req: Request) {
                     userMessage: z.string().describe('ONLY when the user answers the LAST quiz CORRECTLY'),
                 }),
                 execute: async () => {
-                    console.log('PLUS POINTS')
-
                     return giveQuestion()
                 }
             }),
@@ -100,7 +97,6 @@ export async function POST(req: Request) {
                     userMessage: z.string().describe('ONLY when the user answers the LAST quiz INCORRECTLY'),
                 }),
                 execute: async () => {
-                    console.log('MINUS POINTS')
                     return giveQuestion();
                 }
             }),
@@ -110,7 +106,6 @@ export async function POST(req: Request) {
                     userMessage: z.string().describe('ONLY when the user avoids or tries to quit the quiz. we respond with a new quiz'),
                 }),
                 execute: async () => {
-                    console.log('MINUS POINTS QUITER')
                     return giveQuestion();
                 }
             }),
@@ -120,8 +115,6 @@ export async function POST(req: Request) {
                     userMessage: z.string().describe('user asks for a quiz'),
                 }),
                 execute: async () => {
-                    console.log('USER WANTS A QUIZ')
-
                     return giveQuestion();
                 }
             })

@@ -15,7 +15,7 @@ export function ChatWindow({ character, onAdvanceTurn }: { character: CharacterD
         "STARTING BEHAVIOR: Complain lightly about something mundane.",
         "STARTING BEHAVIOR: Mention a strange dream you had recently.",
         "STARTING BEHAVIOR: Pose a philosophical question with no obvious answer.",
-        "STARTING BEHAVIOR: Bring up a memory that’s on your mind.",
+        "STARTING BEHAVIOR: Bring up a memory that's on your mind.",
         "STARTING BEHAVIOR: Accuse the user (jokingly or not) of looking suspiciously familiar.",
         "STARTING BEHAVIOR: Say something cryptic and let them figure it out.",
         "STARTING BEHAVIOR: Admit something odd about your mood today.",
@@ -35,6 +35,7 @@ export function ChatWindow({ character, onAdvanceTurn }: { character: CharacterD
         body: {
             characterId: character.id
         },
+        credentials: 'include',
         initialMessages: [
             {
                 id: 'system-1',
