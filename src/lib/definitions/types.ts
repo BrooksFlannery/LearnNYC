@@ -54,6 +54,7 @@ export type GameManager = {
     exitTrain: (train: Train) => void;
     boardTrain: (train: Train) => void;
     advanceTurn: () => void;
+    resetGame: () => void;
 }
 
 export type StationComplex = {

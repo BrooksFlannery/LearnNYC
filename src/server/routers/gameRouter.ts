@@ -23,6 +23,9 @@ export const gameRouter = router({
     advanceTurn: protectedProcedure.mutation(async ({ ctx }) => {
         return await gameService.advanceTurn(ctx.userId);
     }),
+    resetGame: protectedProcedure.mutation(async ({ ctx }) => {
+        return await gameService.resetGame(ctx.userId);
+    }),
 });
 
 
