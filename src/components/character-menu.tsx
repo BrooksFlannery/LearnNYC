@@ -22,7 +22,7 @@ export function CharacterMenu() {
             }
         };
 
-        fetchCharacters();
+        void fetchCharacters();
     }, []);
 
     return (

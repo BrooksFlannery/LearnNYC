@@ -1,11 +1,11 @@
-import { buildStationGraph, buildLineGraph, seedTrains } from "~/lib/stationUtils";
+import { buildStationGraph, seedTrains } from "~/lib/stationUtils";
 import { randomUUID } from "crypto";
 import type { GameState, Station, Train, TrainLine } from "~/lib/definitions/types";
 import { GOD_MODE } from "~/lib/godMode";
 
 const stationMap = buildStationGraph();
-const lineMap = buildLineGraph();
-//should probably make a trainsMap too?
+// Build line graph once (may be useful for future functions)
+//does that actually make sense in a serverless environment?
 
 export function createNewGame(): GameState {
     const middleVillage = stationMap.get("station-748");
@@ -71,15 +71,9 @@ export function exitTrain(state: GameState): GameState {
     };
 }
 
-// Generate a globally-unique train id. Using UUID avoids collisions that
-// can happen if the serverless function is re-initialised (which resets any
-// in-memory counters) while a previous game instance already contains ids
-// like `train-1045`.
 function generateTrainId() {
     return `train-${randomUUID()}`;
 }
-
-// (incremental counter removed – we now rely on UUIDs for uniqueness)
 
 export function tickTrains(state: GameState): GameState {
     const updatedTrains: Train[] = [];

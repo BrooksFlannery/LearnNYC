@@ -18,8 +18,10 @@ async function fetchByUserId(userId: string): Promise<GameState | undefined> {
     const row = rows[0];
     if (!row) return undefined;
 
-    const raw = row.state as unknown;
-    const state: GameState = typeof raw === "string" ? JSON.parse(raw) : (raw as GameState);
+    const raw = row.state;
+    const state: GameState = typeof raw === "string"
+        ? (JSON.parse(raw) as unknown as GameState)
+        : (raw as GameState);
     cache.set(userId, state);
     return state;
 }

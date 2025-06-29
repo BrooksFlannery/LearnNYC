@@ -13,7 +13,7 @@ export function Logout() {
     };
 
     return (
-        <Button variant='outline' onClick={handleLogout}>
+        <Button variant='outline' onClick={() => { void handleLogout(); }}>
             Logout <LogOut className='size-4' />
         </Button>
     )

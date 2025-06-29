@@ -12,9 +12,11 @@ async function createContext(
     // Delegate to Better-Auth to read cookies & build the session
     const sessionData = await auth.api.getSession({ headers: opts.req.headers });
 
-    return {
-        userId: sessionData?.user?.id,
-    };
+    const ctx: TrpcContext = sessionData?.user?.id
+        ? { userId: sessionData.user.id }
+        : {};
+
+    return ctx;
 }
 
 const handler = (req: Request) =>

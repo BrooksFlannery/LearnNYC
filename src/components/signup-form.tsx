@@ -62,7 +62,15 @@ export function SignupForm(props: React.ComponentProps<"div">) {
                 </CardHeader>
                 <CardContent>
                     <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
+                        <form
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                void form.handleSubmit((values) => {
+                                    void onSubmit(values);
+                                })(e);
+                            }}
+                            className="flex flex-col gap-6"
+                        >
                             <FormField
                                 control={form.control}
                                 name="name"

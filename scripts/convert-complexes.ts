@@ -2,20 +2,20 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import { COMPLEXES } from '../src/lib/data/complexes.ts';
+import { COMPLEXES } from '../src/domain/data/complexes.ts';
 import type { StationComplex } from '../src/lib/definitions/types.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function main() {
-    const outFile = path.resolve(__dirname, '../src/lib/data/complexes.ts');
+    const outFile = path.resolve(__dirname, '../src/domain/data/complexes.ts');
 
     const header = `// AUTO-GENERATED FILE – run npm run convert:complexes to regenerate\n` +
         `// ${new Date().toISOString()}\n\n` +
         `import type { StationComplex } from "../definitions/types";\n\n`;
 
-    const complexesArray = (COMPLEXES as StationComplex[]).map(c => ({ id: c.id, stationIds: c.stationIds }));
+    const complexesArray = (COMPLEXES as StationComplex[]).map((c) => ({ id: c.id, stationIds: c.stationIds }));
 
     const complexesCode = `export const COMPLEXES: readonly StationComplex[] = ${JSON.stringify(complexesArray, null, 2)} as const;\n\n`;
 
@@ -25,7 +25,7 @@ async function main() {
     console.log(`complexes.ts rewritten with ${COMPLEXES.length} complexes.`);
 }
 
-main().catch(err => {
+main().catch((err) => {
     console.error(err);
     process.exit(1);
-}); 
+});

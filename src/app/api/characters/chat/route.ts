@@ -2,7 +2,7 @@ import { openai } from '@ai-sdk/openai';
 import { streamText, tool } from 'ai';
 import { z } from 'zod';
 import { db } from '~/db/drizzle'
-import { character, question } from '~/db/schema';
+import { question } from '~/db/schema';
 import { eq } from 'drizzle-orm';
 import { shortestPath, findStationByName } from '~/lib/stationUtils';
 import { gameService } from '~/server/services/gameService';
@@ -10,8 +10,19 @@ import { auth } from '~/lib/auth';
 
 export const maxDuration = 30;
 
+const messageSchema = z.object({
+    role: z.enum(['user', 'assistant', 'system']),
+    content: z.string(),
+    id: z.string().optional(),
+});
+
+const bodySchema = z.object({
+    characterId: z.string(),
+    messages: z.array(messageSchema),
+});
+
 export async function POST(req: Request) {
-    // Ensure the caller is authenticated – Better-Auth stores the session in cookies.
+
     const session = await auth.api.getSession({ headers: req.headers });
     if (!session?.user?.id) {
         return new Response("Unauthenticated", { status: 401 });
@@ -19,10 +30,10 @@ export async function POST(req: Request) {
 
     const userId = session.user.id;
 
-    const { messages, characterId } = await req.json();
+    const { messages, characterId } = bodySchema.parse(await req.json());
 
     async function giveQuestion() {
-        //
+
         const questions = await db
             .select()
             .from(question)

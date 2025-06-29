@@ -53,7 +53,8 @@ export function useGameState(): GameManager {
         boardTrainMut.mutate({ trainId: train.id });
     };
 
-    const exitTrain = (_: Train) => {
+    const exitTrain = (train: Train) => {
+        void train;
         exitTrainMut.mutate();
     };
 

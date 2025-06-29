@@ -73,7 +73,15 @@ export function LoginForm(props: React.ComponentProps<"div">) {
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                void form.handleSubmit((values) => {
+                  void onSubmit(values);
+                })(e);
+              }}
+              className="flex flex-col gap-6"
+            >
               <FormField
                 control={form.control}
                 name="email"
@@ -120,7 +128,7 @@ export function LoginForm(props: React.ComponentProps<"div">) {
                     ? (<Loader2 className="size-4 animate-spin" />)
                     : ("Login")}
                 </Button>
-                <Button type="button" variant="outline" className="w-full" onClick={signInWithGoogle}>
+                <Button type="button" variant="outline" className="w-full" onClick={() => { void signInWithGoogle(); }}>
                   Login with Google
                 </Button>
               </div>

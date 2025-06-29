@@ -17,7 +17,7 @@ const geist = Geist({
   variable: "--font-geist-sans",
 });
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <html lang="en" className={`${geist.variable}`}>
