@@ -8,7 +8,7 @@ import { useGameState } from "~/hooks/useGameState";
 import { clientChatApi } from "~/lib/api";
 import type { CharacterData, GameManager } from "~/lib/definitions/types";
 import { GodModeProvider } from "~/contexts/GodModeContext";
-import { Logout } from "~/components/Logout";
+import { Logout } from "@/components/Logout";
 
 export default function HomeClient() {
     const gameManager: GameManager = useGameState();
