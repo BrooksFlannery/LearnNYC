@@ -6,6 +6,7 @@ import type { GameManager } from "~/lib/definitions/types";
 import { GOD_MODE } from "~/lib/godMode";
 import { useGodMode } from "~/contexts/GodModeContext";
 import { isTrainAtTerminus } from "~/lib/stationUtils";
+import PathEditor from "~/components/PathEditor";
 
 
 export default function SubwayMap({ gameManager }: { gameManager: GameManager }) {
@@ -63,6 +64,9 @@ export default function SubwayMap({ gameManager }: { gameManager: GameManager })
                 >
                     {/* Subway map base image */}
                     <image href="/nyc_subway_map.svg" x={0} y={0} width={2500} height={2700} />
+
+                    {/* Path editor overlay (only active in God Mode) */}
+                    <PathEditor />
 
                     {/* Draw stations */}
                     {(() => {
