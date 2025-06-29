@@ -51,7 +51,7 @@ export default function HomeClient() {
                             <CharacterScreen
                                 characters={characters}
                                 onAdvanceTurn={gameManager.advanceTurn}
-                                characterTrigger={gameManager.characterTrigger}
+                                currentCharacterId={gameManager.game?.currentCharacterId}
                             />
                         </div>
                     </div>

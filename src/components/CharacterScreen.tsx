@@ -1,31 +1,24 @@
 'use client'
 
 import type { CharacterData } from "~/lib/definitions/types";
-import { ChatWindow } from "./ChatWindow";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { Loader2 } from "lucide-react";
+import { ChatWindow } from "./ChatWindow";
 import { GOD_MODE } from "~/lib/godMode";
 
 export function CharacterScreen({
     characters,
     onAdvanceTurn,
-    characterTrigger,
+    currentCharacterId,
 }: {
     characters: CharacterData[] | null;
     onAdvanceTurn?: () => void;
-    characterTrigger: number;
+    currentCharacterId: string | null | undefined;
 }) {
-    const [character, setCharacter] = useState<CharacterData | null>(null);
-
-    useEffect(() => {
-        if (characters && characters.length > 0) {
-            const randomIndex = Math.floor(Math.random() * characters.length);
-            const randomCharacter = characters?.[randomIndex];
-            if (randomCharacter) {
-                setCharacter(randomCharacter);
-            }
-        }
-    }, [characters, characterTrigger]);
+    const character = useMemo(() => {
+        if (!characters || !currentCharacterId) return null;
+        return characters.find((c) => c.id === currentCharacterId) ?? null;
+    }, [characters, currentCharacterId]);
 
     if (GOD_MODE) return null;
 
@@ -40,7 +33,7 @@ export function CharacterScreen({
     return (
         <div className="flex flex-col w-100">
             <ChatWindow
-                key={`${character.id}-${characterTrigger}`}
+                key={character.id}
                 character={character}
                 {...(onAdvanceTurn ? { onAdvanceTurn } : {})}
             />

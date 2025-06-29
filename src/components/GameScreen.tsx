@@ -118,7 +118,7 @@ export default function GameScreen({ gameManager }: { gameManager: GameManager }
                             {walkableStations.map((station) => (
                                 <button
                                     key={station.id}
-                                    className="bg-blue-400 hover:bg-blue-500 text-white px-4 py-2 rounded w-full text-left"
+                                    className="bg-blue-400 hover:bg-blue-500 text-white px-2 py-1 rounded w-full text-left"
                                     onClick={() => gameManager.makeMove(station)}
                                 >
                                     {`Walk to ${station.name}`}
@@ -224,7 +224,7 @@ export default function GameScreen({ gameManager }: { gameManager: GameManager }
                                             return (
                                                 <button
                                                     key={info.station.id}
-                                                    className="bg-green-400"
+                                                    className="bg-green-400 hover:bg-green-500 text-white px-2 py-1 rounded"
                                                     onClick={() => gameManager.exitTrain(train)}
                                                 >
                                                     {`Arriving – ${info.station.name} (exit)`}

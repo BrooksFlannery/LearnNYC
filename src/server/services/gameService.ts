@@ -8,12 +8,28 @@ import {
 } from "~/domain/game/engine";
 import type { GameState } from "~/lib/definitions/types";
 import { gameRepo } from "~/server/repositories/gameRepo";
+import { db } from "~/db/drizzle";
+import { character as characterTable } from "~/db/schema";
+
+async function getRandomCharacterId(): Promise<string | null> {
+    const characters = await db.select({ id: characterTable.id }).from(characterTable);
+    if (!characters.length) return null;
+    const randomIdx = Math.floor(Math.random() * characters.length);
+    return characters[randomIdx]!.id;
+}
 
 async function ensureState(userId: string): Promise<GameState> {
     const existing = await gameRepo.fetchByUserId(userId);
-    if (existing) return existing;
+    if (existing) {
+        if (!existing.currentCharacterId) {
+            existing.currentCharacterId = await getRandomCharacterId();
+            await gameRepo.save(userId, existing);
+        }
+        return existing;
+    }
 
     const fresh = createNewGame();
+    fresh.currentCharacterId = await getRandomCharacterId();
     await gameRepo.save(userId, fresh);
     return fresh;
 }
@@ -35,6 +51,7 @@ export const gameService = {
         if (!userId) throw new Error("Authenticated user required");
         const prev = await ensureState(userId);
         const next = tickTrains(engineMakeMove(prev, nextStationId));
+        next.currentCharacterId = await getRandomCharacterId();
         await gameRepo.save(userId, next);
         return next;
     },
@@ -43,6 +60,7 @@ export const gameService = {
         if (!userId) throw new Error("Authenticated user required");
         const prev = await ensureState(userId);
         const next = tickTrains(engineBoardTrain(prev, trainId));
+        next.currentCharacterId = await getRandomCharacterId();
         await gameRepo.save(userId, next);
         return next;
     },
@@ -51,6 +69,7 @@ export const gameService = {
         if (!userId) throw new Error("Authenticated user required");
         const prev = await ensureState(userId);
         const next = tickTrains(engineExitTrain(prev));
+        next.currentCharacterId = await getRandomCharacterId();
         await gameRepo.save(userId, next);
         return next;
     },

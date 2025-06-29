@@ -24,6 +24,7 @@ export function createNewGame(): GameState {
         playerMode: "station",
         currentTrain: null,
         trains,
+        currentCharacterId: null,
     };
 }
 
