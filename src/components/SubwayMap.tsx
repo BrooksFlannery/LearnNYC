@@ -65,8 +65,8 @@ export default function SubwayMap({ gameManager }: { gameManager: GameManager })
 
                     {/* Draw stations */}
                     {(() => {
-                        const currentComplex = gameManager.game!.currentStation.complexId;
-                        const currentStationId = gameManager.game!.currentStation.id;
+                        const currentComplex = gameManager.game.currentStation.complexId;
+                        const currentStationId = gameManager.game.currentStation.id;
                         return REAL_STATIONS.map(station => {
                             const isCurrent = station.id === currentStationId;
                             const stationComplex = station.complexId;

@@ -14,6 +14,7 @@
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitAny": true,
+    "exactOptionalPropertyTypes": true,
     "checkJs": true,
     /* Bundled projects */
     "lib": [

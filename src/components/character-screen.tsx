@@ -35,7 +35,7 @@ export function CharacterScreen({ characters, onAdvanceTurn, characterTrigger }:
             <ChatWindow
                 key={`${character.id}-${characterTrigger}`}
                 character={character}
-                onAdvanceTurn={onAdvanceTurn}
+                {...(onAdvanceTurn ? { onAdvanceTurn } : {})}
             />
         </div>
     )

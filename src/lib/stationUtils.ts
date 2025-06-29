@@ -67,7 +67,7 @@ function seedTrain(line: TrainLine, stationIndex: number): Train {
         currentStation: REAL_STATIONS.find(station => station.id === stationId)!,
         nextArrivalTurn: 1,
         line: line,
-        id: `train-${typeof globalThis !== 'undefined' && globalThis.crypto && 'randomUUID' in globalThis.crypto ? (globalThis.crypto as Crypto).randomUUID() : Math.random().toString(36).slice(2)}`,
+        id: `train-${typeof globalThis !== 'undefined' && globalThis.crypto && 'randomUUID' in globalThis.crypto ? (globalThis.crypto).randomUUID() : Math.random().toString(36).slice(2)}`,
         isAtStation: true,
     }
     return newTrain

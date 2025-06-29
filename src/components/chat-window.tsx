@@ -66,7 +66,7 @@ export function ChatWindow({ character, onAdvanceTurn }: { character: CharacterD
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            append({
+            void append({
                 role: 'user',
                 id: 'user-init',
                 content: 'The user cant see this message, you need to talk to them in a way that would make sense if you were approaching a stranger.'
@@ -76,7 +76,7 @@ export function ChatWindow({ character, onAdvanceTurn }: { character: CharacterD
     }, [append])
 
     const submit = () => {
-        handleSubmit();
+        void handleSubmit();
         if (onAdvanceTurn) {
             onAdvanceTurn();
         }

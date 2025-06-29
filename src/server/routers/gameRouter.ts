@@ -5,23 +5,23 @@ import { gameService } from "~/server/services/gameService";
 
 export const gameRouter = router({
     getState: protectedProcedure.query(async ({ ctx }) => {
-        return await gameService.getState(ctx.userId!);
+        return await gameService.getState(ctx.userId);
     }),
     makeMove: protectedProcedure
         .input(z.object({ nextStationId: z.string() }))
         .mutation(async ({ ctx, input }) => {
-            return await gameService.makeMove(ctx.userId!, input.nextStationId);
+            return await gameService.makeMove(ctx.userId, input.nextStationId);
         }),
     boardTrain: protectedProcedure
         .input(z.object({ trainId: z.string() }))
         .mutation(async ({ ctx, input }) => {
-            return await gameService.boardTrain(ctx.userId!, input.trainId);
+            return await gameService.boardTrain(ctx.userId, input.trainId);
         }),
     exitTrain: protectedProcedure.mutation(async ({ ctx }) => {
-        return await gameService.exitTrain(ctx.userId!);
+        return await gameService.exitTrain(ctx.userId);
     }),
     advanceTurn: protectedProcedure.mutation(async ({ ctx }) => {
-        return await gameService.advanceTurn(ctx.userId!);
+        return await gameService.advanceTurn(ctx.userId);
     }),
 });
 

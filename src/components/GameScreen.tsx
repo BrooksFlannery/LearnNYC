@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { GOD_MODE } from '~/lib/godMode';
-import { Flag, MapPin, Info } from 'lucide-react';
+import { Info } from 'lucide-react';
 import type { GameManager, Station } from '~/lib/definitions/types';
 import { buildLineGraph, buildStationGraph, computeArrivalsForStation, buildComplexGraph } from '~/lib/stationUtils';
 import { useGodMode } from '~/contexts/GodModeContext';
@@ -166,7 +166,7 @@ export default function GameScreen({ gameManager }: { gameManager: GameManager }
             {/* Train mode panel*/}
             {gameManager.game.playerMode === 'train' && gameManager.game.currentTrain && (
                 (() => {
-                    const train = gameManager.game!.currentTrain!;
+                    const train = gameManager.game.currentTrain;
                     const line = train.line;
                     const currentIdx = line.line.findIndex(id => id === train.currentStation.id);
                     const lastIdx = line.line.length - 1;

@@ -27,7 +27,7 @@ export default function Home() {
       }
     };
 
-    fetchCharacters();
+    void fetchCharacters();
   }, []);
 
   return (
