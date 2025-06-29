@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { trpc } from "~/utils/trpc";
+import { trpc } from "~/lib/trpc";
 import type { GameManager, Station, Train } from "~/lib/definitions/types";
 
 function increment(prev: number) {

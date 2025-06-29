@@ -1,12 +1,20 @@
 'use client'
 
 import type { CharacterData } from "~/lib/definitions/types";
-import { ChatWindow } from "./chat-window";
+import { ChatWindow } from "./ChatWindow";
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { GOD_MODE } from "~/lib/godMode";
 
-export function CharacterScreen({ characters, onAdvanceTurn, characterTrigger }: { characters: CharacterData[] | null; onAdvanceTurn?: () => void; characterTrigger: number }) {
+export function CharacterScreen({
+    characters,
+    onAdvanceTurn,
+    characterTrigger,
+}: {
+    characters: CharacterData[] | null;
+    onAdvanceTurn?: () => void;
+    characterTrigger: number;
+}) {
     const [character, setCharacter] = useState<CharacterData | null>(null);
 
     useEffect(() => {
@@ -24,8 +32,7 @@ export function CharacterScreen({ characters, onAdvanceTurn, characterTrigger }:
     if (!character) {
         return (
             <div className="flex items-center gap-2">
-                <Loader2 className="h-4 w-4 animate-spin" />
-                Loading...
+                <Loader2 className="h-4 w-4 animate-spin" /> Loading...
             </div>
         );
     }
@@ -38,5 +45,5 @@ export function CharacterScreen({ characters, onAdvanceTurn, characterTrigger }:
                 {...(onAdvanceTurn ? { onAdvanceTurn } : {})}
             />
         </div>
-    )
-}
+    );
+} 

@@ -3,6 +3,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "~/db/drizzle";
 import { nextCookies } from "better-auth/next-js";
 import { schema } from "~/db/schema";
+import { env } from "~/env";
 
 export const auth = betterAuth({
     emailAndPassword: {
@@ -10,8 +11,8 @@ export const auth = betterAuth({
     },
     socialProviders: {
         google: {
-            clientId: process.env.GOOGLE_CLIENT_ID!,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+            clientId: env.GOOGLE_CLIENT_ID,
+            clientSecret: env.GOOGLE_CLIENT_SECRET,
         },
         // github: {
         //     clientId: process.env.GITHUB_CLIENT_ID as string,

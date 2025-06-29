@@ -7,10 +7,8 @@ import type { CharacterData } from "~/lib/definitions/types";
 
 export function CharacterMenu() {
     const api = new clientChatApi();
-
-    const [characters, setCharacters] = useState<CharacterData[] | null>(null)
+    const [characters, setCharacters] = useState<CharacterData[] | null>(null);
     const router = useRouter();
-
 
     useEffect(() => {
         const fetchCharacters = async () => {
@@ -18,7 +16,7 @@ export function CharacterMenu() {
                 const chatData = await api.getCharacters();
                 setCharacters(chatData);
             } catch (err) {
-                console.error('Failed to fetch chats:', err);
+                console.error("Failed to fetch chats:", err);
             }
         };
 
@@ -28,17 +26,14 @@ export function CharacterMenu() {
     return (
         <>
             <h1>Characters</h1>
-            {characters?.map(char => {
+            {characters?.map((char) => {
                 return (
-                    <div
-                        onClick={() => router.push(`/${char.id}`)}
-                        key={char.id}
-                    >
+                    <div onClick={() => router.push(`/${char.id}`)} key={char.id}>
                         {char.name}
                         {char.borough}
                     </div>
-                )
+                );
             })}
         </>
-    )
-}
+    );
+} 

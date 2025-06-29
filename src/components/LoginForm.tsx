@@ -1,13 +1,19 @@
 'use client'
 
-import { Button } from "~/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card"
-import { Input } from "~/components/ui/input"
-import { redirect } from 'next/navigation'
-import Link from 'next/link'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import { Button } from "~/components/ui/button";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "~/components/ui/card";
+import { authClient } from "~/lib/auth-client";
+import { redirect } from "next/navigation";
+import Link from "next/link";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import {
     Form,
     FormControl,
@@ -15,49 +21,54 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "~/components/ui/form"
-import { signUp } from "~/server/authActions"
-import { toast } from "sonner"
-import { useState } from "react"
-import { Loader2 } from "lucide-react"
+} from "~/components/ui/form";
+import { Input } from "~/components/ui/input";
+import { toast } from "sonner";
+import { signIn } from "~/server/authActions";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
+const formSchema = z.object({
+    email: z.string().email(),
+    password: z.string().min(8),
+});
 
-const signupSchema = z.object({
-    name: z.string().min(1, "Name is required"),
-    email: z.string().email("Invalid email address"),
-    password: z.string().min(8, "Password must be at least 8 characters"),
-})
-
-export function SignupForm(props: React.ComponentProps<"div">) {
-    const [isLoading, setIsLoading] = useState(false)
-
-    const form = useForm<z.infer<typeof signupSchema>>({
-        resolver: zodResolver(signupSchema),
+export function LoginForm(props: React.ComponentProps<"div">) {
+    const [isLoading, setIsLoading] = useState(false);
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
         defaultValues: {
-            name: '',
-            email: '',
-            password: '',
+            email: "",
+            password: "",
         },
-    })
-    const onSubmit = async (values: z.infer<typeof signupSchema>) => {
-        setIsLoading(true)
-        const { success, message } = await signUp(values.email, values.password, values.name)
+    });
+
+    const signInWithGoogle = async () => {
+        await authClient.signIn.social({
+            provider: "google",
+            callbackURL: "/",
+        });
+    };
+
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        setIsLoading(true);
+        const { success, message } = await signIn(values.email, values.password);
         if (success) {
             toast.success(message);
-            redirect('/')
+            redirect("/");
         } else {
             toast.error(message);
         }
-        setIsLoading(false)
-    }
+        setIsLoading(false);
+    };
 
     return (
         <div className="flex flex-col gap-6" {...props}>
             <Card>
                 <CardHeader>
-                    <CardTitle>Sign up</CardTitle>
+                    <CardTitle>Login to your account</CardTitle>
                     <CardDescription>
-                        Complete the form to create an account
+                        Enter your email below to login to your account
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -73,26 +84,15 @@ export function SignupForm(props: React.ComponentProps<"div">) {
                         >
                             <FormField
                                 control={form.control}
-                                name="name"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Name</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Your name" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-
-                            <FormField
-                                control={form.control}
                                 name="email"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Email</FormLabel>
                                         <FormControl>
-                                            <Input type="email" placeholder="example@email.com" {...field}
+                                            <Input
+                                                placeholder="example@email.com"
+                                                type="email"
+                                                {...field}
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -123,24 +123,29 @@ export function SignupForm(props: React.ComponentProps<"div">) {
                             />
 
                             <div className="flex flex-col gap-3">
-                                <Button
-                                    type="submit"
-                                    className="w-full"
-                                    disabled={!form.formState.isValid || isLoading}
-                                >
-                                    {isLoading
-                                        ? (<Loader2 className="size-4 animate-spin" />)
-                                        : ("Login")}
+                                <Button type="submit" className="w-full" disabled={isLoading}>
+                                    {isLoading ? (
+                                        <Loader2 className="size-4 animate-spin" />
+                                    ) : (
+                                        "Login"
+                                    )}
                                 </Button>
-                                <Button variant="outline" className="w-full">
-                                    Sign up with Google
+                                <Button
+                                    type="button"
+                                    variant="outline"
+                                    className="w-full"
+                                    onClick={() => {
+                                        void signInWithGoogle();
+                                    }}
+                                >
+                                    Login with Google
                                 </Button>
                             </div>
 
                             <div className="mt-4 text-center text-sm">
-                                Already have an account?{" "}
-                                <Link href="/login" className="underline underline-offset-4">
-                                    Log in
+                                Don&apos;t have an account?{" "}
+                                <Link href="/signup" className="underline underline-offset-4">
+                                    Sign up
                                 </Link>
                             </div>
                         </form>
@@ -148,5 +153,5 @@ export function SignupForm(props: React.ComponentProps<"div">) {
                 </CardContent>
             </Card>
         </div>
-    )
-}
+    );
+} 
