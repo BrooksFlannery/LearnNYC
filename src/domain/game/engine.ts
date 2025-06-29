@@ -1,4 +1,4 @@
-import { buildStationGraph, seedTrains } from "~/lib/stationUtils";
+import { buildStationGraph, seedTrains, isTrainAtTerminus } from "~/lib/stationUtils";
 import { randomUUID } from "crypto";
 import type { GameState, Station, Train, TrainLine } from "~/lib/definitions/types";
 import { GOD_MODE } from "~/lib/godMode";
@@ -52,6 +52,11 @@ export function makeMove(state: GameState, nextStationId: string): GameState {
 export function boardTrain(state: GameState, trainId: string): GameState {
     const train = state.trains.find((t) => t.id === trainId);
     if (!train) return state;
+
+    // Must be at the player's station and not a terminating train
+    if (train.currentStation.id !== state.currentStation.id) return state;
+    if (isTrainAtTerminus(train)) return state;
+
     return {
         ...state,
         currentTrain: train,

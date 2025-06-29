@@ -5,6 +5,7 @@ import { REAL_STATIONS } from "~/domain/data/stations";
 import type { GameManager } from "~/lib/definitions/types";
 import { GOD_MODE } from "~/lib/godMode";
 import { useGodMode } from "~/contexts/GodModeContext";
+import { isTrainAtTerminus } from "~/lib/stationUtils";
 
 
 export default function SubwayMap({ gameManager }: { gameManager: GameManager }) {
@@ -115,7 +116,7 @@ export default function SubwayMap({ gameManager }: { gameManager: GameManager })
 
                     {/* Draw trains */}
                     {!GOD_MODE && gameManager.game.trains.map(train => {
-                        const isAvailable = train.currentStation.id === gameManager.game?.currentStation.id;
+                        const isAvailable = !isTrainAtTerminus(train) && train.currentStation.id === gameManager.game?.currentStation.id;
 
                         return (
                             <g
@@ -127,13 +128,42 @@ export default function SubwayMap({ gameManager }: { gameManager: GameManager })
                                 }}
                                 style={{ cursor: isAvailable ? "pointer" : "default" }}
                             >
-                                <circle
-                                    cx={train.currentStation.coordinates.x}
-                                    cy={train.currentStation.coordinates.y}
-                                    r={7}
-                                    fill={train.isAtStation ? "#FF0000" : "#FF69B4"}
-                                    className="transition-all duration-2000"
-                                />
+                                {(() => {
+                                    const SIZE = 10;
+                                    const { x, y } = train.currentStation.coordinates;
+                                    const cx = x;
+                                    const cy = y;
+                                    return (
+                                        <>
+                                            <circle
+                                                cx={cx}
+                                                cy={cy}
+                                                r={SIZE}
+                                                fill="#ffffff"
+                                                opacity={train.isAtStation ? 1 : 0.9}
+                                                className="transition-all duration-1000 ease-linear"
+                                            />
+                                            <image
+                                                href="/SubwayTrain.svg"
+                                                x={cx - SIZE / 2}
+                                                y={cy - SIZE / 2}
+                                                width={SIZE}
+                                                height={SIZE}
+                                                opacity={train.isAtStation ? 1 : 0.9}
+                                                className="transition-all duration-1000 ease-linear"
+                                            />
+                                            <circle
+                                                cx={cx}
+                                                cy={cy}
+                                                r={SIZE}
+                                                fill="none"
+                                                stroke="#000000"
+                                                strokeWidth={1.5}
+                                                className="transition-all duration-1000 ease-linear"
+                                            />
+                                        </>
+                                    );
+                                })()}
                             </g>
                         );
                     })}

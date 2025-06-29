@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 import { GOD_MODE } from '~/lib/godMode';
 import { Info } from 'lucide-react';
 import type { GameManager, Station } from '~/lib/definitions/types';
-import { buildLineGraph, buildStationGraph, computeArrivalsForStation, buildComplexGraph } from '~/lib/stationUtils';
+import { buildLineGraph, buildStationGraph, computeArrivalsForStation, buildComplexGraph, isTrainAtTerminus } from '~/lib/stationUtils';
 import { useGodMode } from '~/contexts/GodModeContext';
 
 export default function GameScreen({ gameManager }: { gameManager: GameManager }) {
@@ -138,24 +138,39 @@ export default function GameScreen({ gameManager }: { gameManager: GameManager }
                         <p className="text-gray-700">No scheduled trains found.</p>
                     ) : (
                         <div className="space-y-1 text-gray-800">
-                            {arrivals.map(info => {
-                                const displayTurns = Math.max(0, info.arrivalTurns - 1);
-                                if (displayTurns === 0) {
+                            {(() => {
+                                const currentStationId = gameManager.game!.currentStation.id;
+
+                                const visibleArrivals = arrivals.filter(info => {
+                                    const lineTerminusId = info.line.line[info.line.line.length - 1];
+                                    return lineTerminusId !== currentStationId; // hide trains whose run ends here
+                                });
+
+                                return visibleArrivals.map(info => {
+                                    const displayTurns = Math.max(0, info.arrivalTurns - 1);
+                                    if (displayTurns === 0) {
+                                        if (isTrainAtTerminus(info.train)) return null;
+
+                                        return (
+                                            <button
+                                                key={`${info.train.id}-${info.line.id}`}
+                                                className="bg-green-400 hover:bg-green-500 text-white px-2 py-1 rounded"
+                                                onClick={() => gameManager.boardTrain(info.train)}
+                                            >
+                                                {`Arriving – ${info.line.name} (board)`}
+                                            </button>
+                                        );
+                                    }
+                                    // hide trains whose final stop is this station – player can never board
+                                    const terminatesHere = info.line.line[info.line.line.length - 1] === currentStationId;
+                                    if (terminatesHere) return null;
+
+                                    const turnsLabel = `${displayTurns} turn${displayTurns === 1 ? '' : 's'}`;
                                     return (
-                                        <button
-                                            key={`${info.train.id}-${info.line.id}`}
-                                            className="bg-green-400"
-                                            onClick={() => gameManager.boardTrain(info.train)}
-                                        >
-                                            {`Arriving – ${info.line.name} (board)`}
-                                        </button>
+                                        <div key={`${info.train.id}-${info.line.id}`}>{`${turnsLabel} – ${info.line.name}`}</div>
                                     );
-                                }
-                                const turnsLabel = `${displayTurns} turn${displayTurns === 1 ? '' : 's'}`;
-                                return (
-                                    <div key={`${info.train.id}-${info.line.id}`}>{`${turnsLabel} – ${info.line.name}`}</div>
-                                );
-                            })}
+                                });
+                            })()}
                         </div>
                     )}
                 </div>
