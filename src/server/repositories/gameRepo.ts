@@ -3,12 +3,7 @@ import { gameState } from "~/db/schema";
 import { eq } from "drizzle-orm";
 import type { GameState } from "~/lib/definitions/types";
 
-const cache = new Map<string, GameState>();
-
 async function fetchByUserId(userId: string): Promise<GameState | undefined> {
-    const cached = cache.get(userId);
-    if (cached) return cached;
-
     const rows = await db
         .select({ state: gameState.state })
         .from(gameState)
@@ -22,7 +17,6 @@ async function fetchByUserId(userId: string): Promise<GameState | undefined> {
     const state: GameState = typeof raw === "string"
         ? (JSON.parse(raw) as unknown as GameState)
         : (raw as GameState);
-    cache.set(userId, state);
     return state;
 }
 
@@ -48,7 +42,6 @@ async function save(userId: string, state: GameState): Promise<void> {
             updatedAt: new Date(),
         });
     }
-    cache.set(userId, state);
 }
 
 export const gameRepo = {

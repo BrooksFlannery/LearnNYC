@@ -1,11 +1,11 @@
 'use client'
-import { Card, CardContent } from "~/components/ui/card"
-import { useEffect, useRef } from "react"
-import { Loader2 } from "lucide-react"
-import { useChat } from '@ai-sdk/react'
-import type { CharacterData } from '~/lib/definitions/types'
-import { Button } from "./ui/button"
-import Image from "next/image"
+import { Card, CardContent } from "~/components/ui/card";
+import { useEffect, useRef } from "react";
+import { Loader2 } from "lucide-react";
+import { useChat } from "@ai-sdk/react";
+import type { CharacterData } from "~/lib/definitions/types";
+import { Button } from "./ui/button";
+import Image from "next/image";
 
 export function ChatWindow({ character, onAdvanceTurn }: { character: CharacterData; onAdvanceTurn?: () => void }) {
     const starterBehaviors = [
@@ -25,21 +25,20 @@ export function ChatWindow({ character, onAdvanceTurn }: { character: CharacterD
         "STARTING BEHAVIOR: Talk about a rule you always follow, even if no one else does.",
         "STARTING BEHAVIOR: Confess something small, like a guilty pleasure.",
         "STARTING BEHAVIOR: Pretend the user just interrupted your train of thought.",
-    ]
+    ];
 
-    const randomStarter = useRef(
-        starterBehaviors[Math.floor(Math.random() * starterBehaviors.length)]
-    ).current
+    const randomStarter = useRef(starterBehaviors[Math.floor(Math.random() * starterBehaviors.length)]).current;
+
     const { messages, input, handleInputChange, handleSubmit, append } = useChat({
         api: `/api/characters/chat`,
         body: {
-            characterId: character.id
+            characterId: character.id,
         },
-        credentials: 'include',
+        credentials: "include",
         initialMessages: [
             {
-                id: 'system-1',
-                role: 'system',
+                id: "system-1",
+                role: "system",
                 content: `
                 ${character.prompt}
 
@@ -55,25 +54,26 @@ export function ChatWindow({ character, onAdvanceTurn }: { character: CharacterD
                 - Do not use emojis.
                 - Respond naturally and conversationally.
                 - Ask the user questions occasionally to keep the dialogue going.
-      `.trim()
+      `.trim(),
             },
-        ]
-    })
+        ],
+    });
 
     const lastAiMessage = messages
-        .filter(message => message.role === 'assistant' && message.id !== 'system-1')
-        .slice(-1)[0]
+        .filter((message) => message.role === "assistant" && message.id !== "system-1")
+        .slice(-1)[0];
 
     useEffect(() => {
         const timer = setTimeout(() => {
             void append({
-                role: 'user',
-                id: 'user-init',
-                content: 'The user cant see this message, you need to talk to them in a way that would make sense if you were approaching a stranger.'
-            })
-        }, 5)
-        return () => clearTimeout(timer)
-    }, [append])
+                role: "user",
+                id: "user-init",
+                content:
+                    "The user cant see this message, you need to talk to them in a way that would make sense if you were approaching a stranger.",
+            });
+        }, 5);
+        return () => clearTimeout(timer);
+    }, [append]);
 
     const submit = () => {
         void handleSubmit();
@@ -87,30 +87,21 @@ export function ChatWindow({ character, onAdvanceTurn }: { character: CharacterD
         submit();
     };
 
-
     if (!character) {
-        return <div>Loading...</div>
+        return <div>Loading...</div>;
     }
 
     return (
         <div className="flex justify-center relative w-[400]">
-            <Image
-                src={character.image}
-                alt='reebe_ruben image'
-                width={300}
-                height={0}
-                className="absolute rounded-t-md m-6"
-            />
+            <Image src={character.image} alt="reebe_ruben image" width={300} height={0} className="absolute rounded-t-md m-6" />
             <Card className="gap-0 h-140 justify-end">
                 <CardContent className="flex flex-col z-10 min-h-auto justify-end ">
-
                     <div className="text-sm backdrop-brightness-40 text-primary-foreground rounded-md p-4 overflow-y-auto flex justify-center items-start">
                         {lastAiMessage ? (
                             lastAiMessage.content
                         ) : (
                             <div className="flex items-center gap-2">
-                                <Loader2 className="h-4 w-4 animate-spin" />
-                                Loading...
+                                <Loader2 className="h-4 w-4 animate-spin" /> Loading...
                             </div>
                         )}
                     </div>
@@ -138,8 +129,7 @@ export function ChatWindow({ character, onAdvanceTurn }: { character: CharacterD
                         </Button>
                     </form>
                 </CardContent>
-
             </Card>
         </div>
-    )
-}
+    );
+} 
