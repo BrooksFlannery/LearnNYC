@@ -3,7 +3,7 @@
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
 import { Input } from "~/components/ui/input";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,6 +29,7 @@ const signupSchema = z.object({
 
 export function SignupForm(props: React.ComponentProps<"div">) {
     const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
     const form = useForm<z.infer<typeof signupSchema>>({
         resolver: zodResolver(signupSchema),
         defaultValues: {
@@ -43,7 +44,7 @@ export function SignupForm(props: React.ComponentProps<"div">) {
         const { success, message } = await signUp(values.email, values.password, values.name);
         if (success) {
             toast.success(message);
-            redirect("/");
+            router.replace("/");
         } else {
             toast.error(message);
         }
