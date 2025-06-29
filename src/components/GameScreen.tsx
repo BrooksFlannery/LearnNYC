@@ -36,7 +36,7 @@ export default function GameScreen({ gameManager }: { gameManager: GameManager }
             : [];
 
         return (
-            <div className="fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-lg border space-y-1 text-sm w-64">
+            <div className="fixed top-4 right-4 z-50 bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-lg border space-y-1 text-sm w-64">
                 <div className="flex items-center gap-2 font-semibold"><Info className="h-4 w-4" /> God Mode – Station Info</div>
                 <div><span className="font-medium">Name:</span> {station.name}</div>
                 <div><span className="font-medium">ID:</span> {station.id}</div>
@@ -82,6 +82,12 @@ export default function GameScreen({ gameManager }: { gameManager: GameManager }
                         Teleport
                     </button>
                 </div>
+                {/* Reset game state */}
+                <button
+                    onClick={gameManager.resetGame}
+                    className="mt-2 w-full bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded text-xs">
+                    Reset Game
+                </button>
                 <button onClick={toggleStationNames} className="mt-3 w-full bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded text-xs">
                     {showStationNames ? 'Hide Station Names' : 'Show Station Names'}
                 </button>

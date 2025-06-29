@@ -34,6 +34,12 @@ export function useGameState(): GameManager {
         },
     });
 
+    const resetGameMut = trpc.game.resetGame.useMutation({
+        onSuccess(data) {
+            utils.game.getState.setData(undefined, data);
+        },
+    });
+
     //components call these
     const makeMove = (next: Station) => {
         makeMoveMut.mutate({ nextStationId: next.id });
@@ -52,11 +58,16 @@ export function useGameState(): GameManager {
         advanceTurnMut.mutate();
     };
 
+    const resetGame = () => {
+        resetGameMut.mutate();
+    };
+
     return {
         game: gameState,
         makeMove,
         exitTrain,
         boardTrain,
         advanceTurn,
+        resetGame,
     };
 } 

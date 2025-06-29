@@ -81,4 +81,13 @@ export const gameService = {
         await gameRepo.save(userId, next);
         return next;
     },
+
+    // Reset the game back to a fresh state (dev helper)
+    async resetGame(userId: string) {
+        if (!userId) throw new Error("Authenticated user required");
+        const fresh = createNewGame();
+        fresh.currentCharacterId = await getRandomCharacterId();
+        await gameRepo.save(userId, fresh);
+        return fresh;
+    },
 } as const; 
