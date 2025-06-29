@@ -1,10 +1,5 @@
-import { useState } from "react";
 import { trpc } from "~/lib/trpc";
 import type { GameManager, Station, Train } from "~/lib/definitions/types";
-
-function increment(prev: number) {
-    return prev + 1;
-}
 
 export function useGameState(): GameManager {
     const utils = trpc.useUtils();
@@ -14,19 +9,15 @@ export function useGameState(): GameManager {
 
     const gameState = game ?? null;
 
-    const [characterTrigger, setCharacterTrigger] = useState(0);//i really dont like that this hacky thing is still around but i cant be bothered rnnnnnn
-
     const makeMoveMut = trpc.game.makeMove.useMutation({
         onSuccess(data) {
             utils.game.getState.setData(undefined, data);
-            setCharacterTrigger(increment);
         },
     });
 
     const boardTrainMut = trpc.game.boardTrain.useMutation({
         onSuccess(data) {
             utils.game.getState.setData(undefined, data);
-            setCharacterTrigger(increment);
         },
     });
 
@@ -34,7 +25,6 @@ export function useGameState(): GameManager {
     const exitTrainMut = trpc.game.exitTrain.useMutation({
         onSuccess(data) {
             utils.game.getState.setData(undefined, data);
-            setCharacterTrigger(increment);
         },
     });
 
@@ -68,6 +58,5 @@ export function useGameState(): GameManager {
         exitTrain,
         boardTrain,
         advanceTurn,
-        characterTrigger,
     };
 } 

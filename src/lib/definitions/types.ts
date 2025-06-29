@@ -44,7 +44,8 @@ export type GameState = {
     reputation: number;
     playerMode: 'station' | 'train'
     destinationStation: Station;
-    trains: Train[]
+    trains: Train[];
+    currentCharacterId: string | null;
 }
 
 export type GameManager = {
@@ -53,7 +54,6 @@ export type GameManager = {
     exitTrain: (train: Train) => void;
     boardTrain: (train: Train) => void;
     advanceTurn: () => void;
-    characterTrigger: number; //hacky and bs i hate this
 }
 
 export type StationComplex = {
