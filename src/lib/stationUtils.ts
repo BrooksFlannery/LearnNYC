@@ -245,3 +245,9 @@ export function findStationByName(name: string): { station: Station | null; ambi
 
     return { station: matches[0]!, ambiguous: false };
 }
+
+// Returns true if the train is currently sitting at the last station on its line.
+export function isTrainAtTerminus(train: Train): boolean {
+    const lastStationId = train.line.line[train.line.line.length - 1];
+    return train.currentStation.id === lastStationId;
+}
