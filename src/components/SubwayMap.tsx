@@ -6,6 +6,11 @@ import type { GameManager } from "~/lib/definitions/types";
 import { GOD_MODE } from "~/lib/godMode";
 import { useGodMode } from "~/contexts/GodModeContext";
 import { isTrainAtTerminus } from "~/lib/stationUtils";
+import PathEditor from "~/components/PathEditor";
+import { loadPathMap } from "~/lib/trainPaths";
+import { getNextStationOnLine } from "~/lib/stationUtils";
+import type { Station } from "~/lib/definitions/types";
+import { useState, useEffect } from "react";
 
 
 export default function SubwayMap({ gameManager }: { gameManager: GameManager }) {
@@ -25,6 +30,15 @@ export default function SubwayMap({ gameManager }: { gameManager: GameManager })
         : { x: 0, y: 0 };
 
     const { showStationNames } = useGodMode();
+
+    const [pathMap, setPathMap] = useState<Record<string, any> | null>(null);
+
+    useEffect(() => {
+        const pm = loadPathMap();
+        setPathMap(pm);
+    }, []);
+
+    const segmentId = (a: string, b: string) => [a, b].sort().join("->");
 
     if (!gameManager.game) {
         return (
@@ -63,6 +77,9 @@ export default function SubwayMap({ gameManager }: { gameManager: GameManager })
                 >
                     {/* Subway map base image */}
                     <image href="/nyc_subway_map.svg" x={0} y={0} width={2500} height={2700} />
+
+                    {/* Path editor overlay (only active in God Mode) */}
+                    <PathEditor />
 
                     {/* Draw stations */}
                     {(() => {
@@ -118,6 +135,32 @@ export default function SubwayMap({ gameManager }: { gameManager: GameManager })
                     {!GOD_MODE && gameManager.game.trains.map(train => {
                         const isAvailable = !isTrainAtTerminus(train) && train.currentStation.id === gameManager.game?.currentStation.id;
 
+                        const SIZE = 10;
+                        const from = train.currentStation;
+                        const next: Station | null = getNextStationOnLine(from, train.line);
+
+                        // Build offset-path string if we have geometry
+                        let offsetPathStyle: React.CSSProperties = {};
+                        if (pathMap && next) {
+                            const seg = pathMap[segmentId(from.id, next.id)];
+                            if (seg) {
+                                // Ensure correct direction – reverse points if necessary
+                                const pts = seg.fromId === from.id ? seg.points : [...seg.points].reverse();
+                                const d = pts
+                                    .map((p: { x: number; y: number }, idx: number) => `${idx === 0 ? "M" : "L"}${p.x},${p.y}`)
+                                    .join(" ");
+                                offsetPathStyle = {
+                                    offsetPath: `path('${d}')`,
+                                    offsetDistance: train.isAtStation ? "0%" : "100%",
+                                    offsetRotate: "auto 90deg",
+                                    transition: "offset-distance 0.9s linear",
+                                };
+                            }
+                        }
+
+                        // fallback coordinates if no path
+                        const { x: fx, y: fy } = from.coordinates;
+
                         return (
                             <g
                                 key={train.id}
@@ -126,44 +169,34 @@ export default function SubwayMap({ gameManager }: { gameManager: GameManager })
                                         gameManager.boardTrain(train);
                                     }
                                 }}
-                                style={{ cursor: isAvailable ? "pointer" : "default" }}
+                                style={{ cursor: isAvailable ? "pointer" : "default", ...offsetPathStyle }}
                             >
-                                {(() => {
-                                    const SIZE = 10;
-                                    const { x, y } = train.currentStation.coordinates;
-                                    const cx = x;
-                                    const cy = y;
-                                    return (
-                                        <>
-                                            <circle
-                                                cx={cx}
-                                                cy={cy}
-                                                r={SIZE}
-                                                fill="#ffffff"
-                                                opacity={train.isAtStation ? 1 : 0.9}
-                                                className="transition-all duration-1000 ease-linear"
-                                            />
-                                            <image
-                                                href="/SubwayTrain.svg"
-                                                x={cx - SIZE / 2}
-                                                y={cy - SIZE / 2}
-                                                width={SIZE}
-                                                height={SIZE}
-                                                opacity={train.isAtStation ? 1 : 0.9}
-                                                className="transition-all duration-1000 ease-linear"
-                                            />
-                                            <circle
-                                                cx={cx}
-                                                cy={cy}
-                                                r={SIZE}
-                                                fill="none"
-                                                stroke="#000000"
-                                                strokeWidth={1.5}
-                                                className="transition-all duration-1000 ease-linear"
-                                            />
-                                        </>
-                                    );
-                                })()}
+                                <circle
+                                    cx={offsetPathStyle.offsetPath ? 0 : fx}
+                                    cy={offsetPathStyle.offsetPath ? 0 : fy}
+                                    r={SIZE}
+                                    fill="#ffffff"
+                                    opacity={train.isAtStation ? 1 : 0.9}
+                                    className="transition-all duration-1000 ease-linear"
+                                />
+                                <image
+                                    href="/SubwayTrain.svg"
+                                    x={offsetPathStyle.offsetPath ? -SIZE / 2 : fx - SIZE / 2}
+                                    y={offsetPathStyle.offsetPath ? -SIZE / 2 : fy - SIZE / 2}
+                                    width={SIZE}
+                                    height={SIZE}
+                                    opacity={train.isAtStation ? 1 : 0.9}
+                                    className="transition-all duration-1000 ease-linear"
+                                />
+                                <circle
+                                    cx={offsetPathStyle.offsetPath ? 0 : fx}
+                                    cy={offsetPathStyle.offsetPath ? 0 : fy}
+                                    r={SIZE}
+                                    fill="none"
+                                    stroke="#000000"
+                                    strokeWidth={1.5}
+                                    className="transition-all duration-1000 ease-linear"
+                                />
                             </g>
                         );
                     })}

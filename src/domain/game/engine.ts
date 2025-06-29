@@ -1,4 +1,4 @@
-import { buildStationGraph, seedTrains, isTrainAtTerminus } from "~/lib/stationUtils";
+import { buildStationGraph, seedTrains, isTrainAtTerminus, getNextStationOnLine } from "~/lib/stationUtils";
 import { randomUUID } from "crypto";
 import type { GameState, Station, Train, TrainLine } from "~/lib/definitions/types";
 import { GOD_MODE } from "~/lib/godMode";
@@ -85,19 +85,31 @@ export function tickTrains(state: GameState): GameState {
     const updatedTrains: Train[] = [];
 
     state.trains.forEach((train) => {
-        const nextTurn = train.nextArrivalTurn - 1;
+        if (train.isAtStation) {
+            // Train is currently at a station – determine if it departs this turn
+            const nextTurn = train.nextArrivalTurn - 1;
+            if (nextTurn > 0) {
+                // Still waiting at station
+                updatedTrains.push({ ...train, nextArrivalTurn: nextTurn });
+                return;
+            }
 
-        if (nextTurn > 0) {
-            updatedTrains.push({ ...train, nextArrivalTurn: nextTurn, isAtStation: false });
+            // Depart now – remain at current station coordinates but flag as in-transit
+            updatedTrains.push({
+                ...train,
+                isAtStation: false,
+                nextArrivalTurn: 0, // will arrive next turn
+            });
             return;
         }
 
-        const nextStation = getNextStationFromLine(train.currentStation, train.line);
+        // Train is in transit – time to arrive at the next station
+        const nextStation = getNextStationOnLine(train.currentStation, train.line);
 
-        // End of the line train logic
+        // End-of-line handling
         if (!nextStation) {
-            const firstStationId = train.line.line[0];
-            const firstStation = firstStationId ? stationMap.get(firstStationId) : undefined;
+            const firstId = train.line.line[0];
+            const firstStation = firstId ? stationMap.get(firstId) : undefined;
             if (firstStation) {
                 updatedTrains.push({
                     currentStation: firstStation,
@@ -142,18 +154,4 @@ export function tickTrains(state: GameState): GameState {
     return newState;
 }
 
-function getNextStationFromLine(currentStation: Station, trainLine: TrainLine): Station | null {
-
-    const currentIndex = trainLine.line.findIndex(
-        (stationId) => stationMap.get(stationId)?.id === currentStation.id,
-    );
-
-    if (currentIndex === -1) return null;
-
-    const nextIndex = currentIndex + 1;
-
-    if (nextIndex >= trainLine.line.length) return null;
-
-    const nextStationId = trainLine.line[nextIndex];
-    return nextStationId ? stationMap.get(nextStationId) ?? null : null;
-} 
+// Removed local helper – use shared getNextStationOnLine instead. 

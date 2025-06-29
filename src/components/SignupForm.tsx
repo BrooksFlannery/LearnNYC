@@ -17,7 +17,6 @@ import {
     FormMessage,
 } from "~/components/ui/form";
 import { signUp } from "~/server/authActions";
-import { toast } from "sonner";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 
@@ -43,10 +42,10 @@ export function SignupForm(props: React.ComponentProps<"div">) {
         setIsLoading(true);
         const { success, message } = await signUp(values.email, values.password, values.name);
         if (success) {
-            toast.success(message);
+            console.info(message);
             router.replace("/");
         } else {
-            toast.error(message);
+            console.error(message);
         }
         setIsLoading(false);
     };

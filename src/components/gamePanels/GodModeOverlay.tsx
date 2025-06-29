@@ -8,7 +8,7 @@ import type { GameManager, Station } from "~/lib/definitions/types";
 import { useGodMode } from "~/contexts/GodModeContext";
 
 export default function GodModeOverlay({ gameManager }: { gameManager: GameManager }) {
-    const { showStationNames, toggleStationNames } = useGodMode();
+    const { showStationNames, toggleStationNames, editingPaths, toggleEditingPaths, showCharacterScreen, toggleCharacterScreen } = useGodMode();
     const [teleportInput, setTeleportInput] = useState('');
 
     const stationMap = useMemo(() => buildStationGraph(), []);
@@ -83,6 +83,20 @@ export default function GodModeOverlay({ gameManager }: { gameManager: GameManag
                 className="mt-3 w-full bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded text-xs"
             >
                 {showStationNames ? 'Hide Station Names' : 'Show Station Names'}
+            </button>
+
+            <button
+                onClick={toggleEditingPaths}
+                className="mt-2 w-full bg-green-600 hover:bg-green-700 text-white py-1 px-2 rounded text-xs"
+            >
+                {editingPaths ? 'Exit Path Editor' : 'Edit Train Paths'}
+            </button>
+
+            <button
+                onClick={toggleCharacterScreen}
+                className="mt-2 w-full bg-indigo-600 hover:bg-indigo-700 text-white py-1 px-2 rounded text-xs"
+            >
+                {showCharacterScreen ? 'Hide Character Screen' : 'Show Character Screen'}
             </button>
         </div>
     );

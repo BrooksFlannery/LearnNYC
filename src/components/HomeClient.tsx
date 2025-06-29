@@ -7,7 +7,7 @@ import SubwayMap from "~/components/SubwayMap";
 import { useGameState } from "~/hooks/useGameState";
 import { clientChatApi } from "~/lib/api";
 import type { CharacterData, GameManager } from "~/lib/definitions/types";
-import { GodModeProvider } from "~/contexts/GodModeContext";
+import { GodModeProvider, useGodMode } from "~/contexts/GodModeContext";
 import { Logout } from "./Logout";
 
 export default function HomeClient() {
@@ -45,18 +45,35 @@ export default function HomeClient() {
                         </div>
                     </div>
 
-                    {/* Character screen – bottom left */}
-                    <div className="absolute bottom-0 left-0 p-4 pointer-events-none max-w-sm w-80">
-                        <div className="pointer-events-auto">
-                            <CharacterScreen
-                                characters={characters}
-                                onAdvanceTurn={gameManager.advanceTurn}
-                                currentCharacterId={gameManager.game?.currentCharacterId}
-                            />
-                        </div>
-                    </div>
+                    {/* Character screen – bottom left (toggleable) */}
+                    <CharacterScreenToggle
+                        characters={characters}
+                        gameManager={gameManager}
+                    />
                 </div>
             </main>
         </GodModeProvider>
+    );
+}
+
+// -------------------------------------------------------------------------
+interface CSToggleProps {
+    characters: CharacterData[] | null;
+    gameManager: GameManager;
+}
+
+function CharacterScreenToggle({ characters, gameManager }: CSToggleProps) {
+    const { showCharacterScreen } = useGodMode();
+    if (!showCharacterScreen) return null;
+    return (
+        <div className="absolute bottom-0 left-0 p-4 pointer-events-none max-w-sm w-80">
+            <div className="pointer-events-auto">
+                <CharacterScreen
+                    characters={characters}
+                    onAdvanceTurn={gameManager.advanceTurn}
+                    currentCharacterId={gameManager.game?.currentCharacterId}
+                />
+            </div>
+        </div>
     );
 } 

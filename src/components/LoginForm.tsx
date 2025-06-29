@@ -23,7 +23,6 @@ import {
     FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { toast } from "sonner";
 import { signIn } from "~/server/authActions";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
@@ -55,10 +54,10 @@ export function LoginForm(props: React.ComponentProps<"div">) {
         setIsLoading(true);
         const { success, message } = await signIn(values.email, values.password);
         if (success) {
-            toast.success(message);
+            console.info(message);
             router.replace("/");
         } else {
-            toast.error(message);
+            console.error(message);
         }
         setIsLoading(false);
     };
