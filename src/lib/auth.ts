@@ -6,6 +6,9 @@ import { schema } from "~/db/schema";
 import { env } from "~/env";
 
 export const auth = betterAuth({
+    baseURL: env.NODE_ENV === "production" 
+        ? "https://nyc-chatbot-alpha.vercel.app" 
+        : "http://localhost:3000",
     emailAndPassword: {
         enabled: true
     },
