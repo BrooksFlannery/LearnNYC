@@ -1,14 +1,19 @@
 import { REAL_STATIONS } from "~/domain/data/stations";
 import { allLines } from "~/domain/data/lines";
 import type { Train, TrainLine } from "~/lib/definitions/types";
+import { randomUUID } from "crypto";
 
 function seedTrain(line: TrainLine, stationIndex: number): Train {
     const stationId = line.line[stationIndex];
+    const station = REAL_STATIONS.find(station => station.id === stationId);
+    if (!station) {
+        throw new Error(`Station not found: ${stationId}`);
+    }
     const newTrain: Train = {
-        currentStation: REAL_STATIONS.find(station => station.id === stationId)!,
+        currentStation: station,
         nextArrivalTurn: 1,
         line: line,
-        id: `train-${typeof globalThis !== 'undefined' && globalThis.crypto && 'randomUUID' in globalThis.crypto ? (globalThis.crypto).randomUUID() : Math.random().toString(36).slice(2)}`,
+        id: `train-${randomUUID()}`,
         isAtStation: true,
     };
     return newTrain;
